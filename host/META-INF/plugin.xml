@@ -1,0 +1,31 @@
+<!DOCTYPE idea-plugin PUBLIC "Plugin/DTD" "http://plugins.intellij.net/plugin.dtd">
+<idea-plugin url="http://code.google.com/p/pmip/">
+    <name>PMIP - Poor Mans IDE Plugin</name>
+    <id>pmip</id>
+    <description>
+        <![CDATA[
+        <html>
+        <body>A simple tool for scripting Intellij plugins in jruby.</body>
+        </html>]]>
+    </description>
+    <version>0.2.0</version>
+    <vendor logo="/pmip-16.png">Paul Allton</vendor>
+    <change-notes>
+        <![CDATA[
+        <html>
+        <body>Initial version.<br/>Please see <a href="http://code.google.com/p/pmip/">homepage</a> for full instructions and plugin helper bundles.</body>
+        </html>]]>
+    </change-notes>
+    <idea-version since-build="3000"/>
+    <project-components>
+        <component>
+            <implementation-class>pmip.PMIP</implementation-class>
+        </component>
+    </project-components>
+    <actions>
+        <group id="PMIP::PopupMenu" text="_PMIP" popup="true">
+            <add-to-group group-id="MainMenu" anchor="after" relative-to-action="RefactoringMenu"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="RefactoringMenu"/>
+        </group>
+    </actions>
+</idea-plugin>

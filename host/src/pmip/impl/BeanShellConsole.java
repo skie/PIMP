@@ -1,13 +1,11 @@
 package pmip.impl;
 
 import bsh.util.JConsole;
-import com.intellij.openapi.util.IconLoader;
-import static com.intellij.openapi.util.IconLoader.*;
+import static com.intellij.openapi.util.IconLoader.getIcon;
 import pmip.Console;
 import pmip.PMIP;
 
 import java.awt.*;
-//import static java.awt.Font.MONOSPACED;
 import static java.awt.Font.PLAIN;
 
 public class BeanShellConsole implements Console {
@@ -16,7 +14,6 @@ public class BeanShellConsole implements Console {
 
     public BeanShellConsole() {
         console = new JConsole();
-        //TODO: doesnt seem to be abailable in 1.5 .. make it project version be 1.5? actualyl ideally 1.6 ...
         console.setFont(new Font("MONOSPACED", PLAIN, 11));
         console.setAutoscrolls(true);
     }

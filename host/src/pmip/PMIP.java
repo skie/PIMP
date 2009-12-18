@@ -13,12 +13,12 @@ import com.intellij.openapi.wm.ToolWindowManager;
 import org.jetbrains.annotations.NotNull;
 import pmip.impl.BeanShellConsole;
 import pmip.impl.JRubyInterpreter;
+import pmip.impl.ResetScript;
+import pmip.impl.StartupScript;
 import static sugar.Sugar.filepath;
 
 import javax.swing.*;
 import java.awt.*;
-
-import static jedi.functional.FunctionalPrimitives.join;
 
 //TODO:
 //- assign ctrl alt shift P to reset PMIP?
@@ -76,10 +76,12 @@ public class PMIP implements ProjectComponent {
 
         if (interpreter == null) {
             interpreter = new JRubyInterpreter(console);
-            interpreter.eval(new StartupScript(path, pmipScript).toString());
+            new StartupScript().execute(interpreter);
         } else {
             interpreter.reset();
         }
+
+        new ResetScript(path, pmipScript).execute(interpreter);
         bootPMIP(pmipScript);
     }
 

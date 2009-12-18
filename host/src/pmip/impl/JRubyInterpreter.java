@@ -1,15 +1,11 @@
 package pmip.impl;
 
-import org.jruby.embed.LocalVariableBehavior;
 import org.jruby.embed.ScriptingContainer;
-import org.jruby.embed.LocalContextScope;
-import static org.jruby.embed.LocalContextScope.*;
-import static org.jruby.embed.LocalVariableBehavior.*;
-import org.jruby.javasupport.JavaEmbedUtils;
 import pmip.Console;
 import pmip.Interpreter;
 
 public class JRubyInterpreter implements Interpreter {
+
     private final Console console;
     private ScriptingContainer container;
 
@@ -32,7 +28,7 @@ public class JRubyInterpreter implements Interpreter {
             console.error("\n----------------------------------------------------------------------------\n");
             console.error("The error was: " + e.getMessage());
             for (StackTraceElement stackTraceElement : e.getStackTrace()) {
-                console.error("\n  " + stackTraceElement);                
+                console.error("\n  " + stackTraceElement);
             }
             console.error("\n----------------------------------------------------------------------------\n");
         }

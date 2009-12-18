@@ -5,15 +5,17 @@
     <description>
         <![CDATA[
         <html>
-        <body>A simple tool for scripting Intellij plugins in jruby.</body>
+        <body>A simple tool for scripting Intellij plugins in jruby.
+        <br/>Please see <a href="http://code.google.com/p/pmip/">homepage</a> for full instructions, examples and plugin helper bundles.</body>
+        </body>
         </html>]]>
     </description>
-    <version>0.2.0</version>
-    <vendor logo="/pmip-16.png">Paul Allton</vendor>
+    <version>0.2.1</version>
+    <vendor logo="/pmip-16.png" email="paulallton@gmail.com" url="http://code.google.com/p/pmip/">Paul Allton</vendor>
     <change-notes>
         <![CDATA[
         <html>
-        <body>Initial version.<br/>Please see <a href="http://code.google.com/p/pmip/">homepage</a> for full instructions and plugin helper bundles.</body>
+        <body>Rebuild to support 1.5 JDK and plugin directive now creates file structure automatically.</body>
         </html>]]>
     </change-notes>
     <idea-version since-build="3000"/>

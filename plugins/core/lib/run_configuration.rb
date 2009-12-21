@@ -2,7 +2,9 @@ import com.intellij.execution.RunManager
 import com.intellij.openapi.actionSystem.AnActionEvent
 
 class RunConfiguration
-  def initialize(context); @context = context; end
+  def initialize(context)
+    @context = context
+  end
 
   def choose(name)
     runner_manager = RunManager.get_instance(@context.project)
@@ -13,7 +15,7 @@ class RunConfiguration
     end
 
     #TODO: should be .first
-    runner_manager.set_selected_configuration(runner_manager.get_settings(run_configurations[0]))
+    runner_manager.set_selected_configuration(runner_manager.get_settings(run_configurations.first))
     self
   end
 

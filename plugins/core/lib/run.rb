@@ -1,3 +1,5 @@
+import com.intellij.openapi.application.ApplicationManager
+
 class RunnableBlock
   include java.lang.Runnable
 
@@ -9,8 +11,6 @@ class RunnableBlock
     @block.call
   end
 end
-
-import com.intellij.openapi.application.ApplicationManager 
 
 class Run
   def self.later(&block)

@@ -3,7 +3,11 @@ class Filepath
     @filepath = filepath.gsub('\\', '/')
   end
 
-  def write_lines(lines)
+  def readlines
+    IO.readlines(@filepath)
+  end
+  
+  def writelines(lines)
     File.open(@filepath,'w') {|f| f.puts lines }
   end
 
@@ -19,7 +23,7 @@ class Filepath
     File.exist?(@filepath)
   end
 
-  def name
+  def filename
     @filepath.split('/').last
   end
 

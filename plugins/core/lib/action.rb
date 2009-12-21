@@ -16,6 +16,7 @@ class PMIPAction < PMIPBaseAction
     super(name)
   end
 
+  #NOTE: this cannot be renamed ...
   def actionPerformed(event)
     reset_result
     context = PMIPContext.new
@@ -43,6 +44,6 @@ class PMIPAction < PMIPBaseAction
   private
 
   def reset_result
-    result("Nothing to do")
+    result('Nothing to do')
   end
 end

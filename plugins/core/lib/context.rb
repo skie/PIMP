@@ -30,6 +30,23 @@ class PMIPContext
     filepath_for(editor_psi_element.virtual_file.path)  
   end
 
+  def editor_current_word
+    selection_model = editor.selection_model
+    selection_model.select_word_at_caret(false)
+    word = selection_model.selected_text
+    selection_model.remove_selection
+    word
+  end
+
+  def root
+    project.base_dir.path
+  end
+
+  def editor
+#    isTrue(isEditor(), "context must be an editor", isEditor());
+    FileEditorManager.get_instance(project).selected_text_editor
+  end
+  
   private
 
   #TODO: maybe whack this
@@ -67,14 +84,5 @@ class PMIPContext
 
   def editor_psi_element
     PsiDocumentManager.get_instance(project).get_psi_file(editor.document)
-  end
-
-  def editor
-#    isTrue(isEditor(), "context must be an editor", isEditor());
-    FileEditorManager.get_instance(project).selected_text_editor
-  end
-
-  def root
-    project.base_dir.path
   end
 end

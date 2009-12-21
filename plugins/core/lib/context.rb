@@ -38,6 +38,18 @@ class PMIPContext
     word
   end
 
+  def editor_current_line
+    selection_model = editor.selection_model
+    start = selection_model.selection_start
+    finish = selection_model.selection_end
+    selection_model.select_line_at_caret
+    line = selection_model.selected_text
+    selection_model.remove_selection
+    selection_model.set_selection(start, finish)
+    #TODO: find a way to set the caret position
+    line
+  end
+
   def root
     project.base_dir.path
   end

@@ -12,7 +12,9 @@ load "lib/run_klondike.rb"
 load "lib/run_unit_tests.rb"
 load "lib/toggle_gr_feed_and_rec_rules.rb"
 
-bind "ctrl alt shift K", RunKlondike.new
+bind "ctrl alt shift K", RunKlondike.new(false)
+bind "ctrl alt K", RunKlondike.new(true)
+
 bind 'ctrl alt shift U', RunUnitTests.new
 bind "ctrl alt shift M", GotoMetaDataType.new
 bind "ctrl alt shift J", GotoJavaType.new

@@ -4,6 +4,7 @@
     <id>pmip</id>
     <category>Custom Languages</category>
     <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.platform</depends>
     <description>
         <![CDATA[
         <html>
@@ -14,12 +15,16 @@
         </body>
         </html>]]>
     </description>
-    <version>0.2.1</version>
+    <version>0.2.2</version>
     <vendor logo="/pmip-16.png" email="paulallton@gmail.com" url="http://code.google.com/p/pmip/">Paul Allton</vendor>
     <change-notes>
         <![CDATA[
         <html>
         <body>
+        0.2.2
+        <UL>
+        <LI>Finally added some instructions!
+        </UL>
         0.2.1
         <UL>
         <LI>Improved error handling when intellij setttings directory contains a space.

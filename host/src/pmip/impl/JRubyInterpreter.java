@@ -4,6 +4,9 @@ import org.jruby.embed.ScriptingContainer;
 import pmip.Console;
 import pmip.Interpreter;
 
+import java.net.URISyntaxException;
+import java.net.URL;
+
 public class JRubyInterpreter implements Interpreter {
 
     private final Console console;
@@ -42,16 +45,29 @@ public class JRubyInterpreter implements Interpreter {
         try {
             ClassLoader oldClassLoader = Thread.currentThread().getContextClassLoader();
             Thread.currentThread().setContextClassLoader(null);
+            guardForDodgyJrubyHome();
             container = new ScriptingContainer();
             container.put("$console", console);
             Thread.currentThread().setContextClassLoader(oldClassLoader);
 
         } catch (Exception e) {
-            console.error("Unable to start jruby engine: " + e.getMessage());
+            console.error("PMIP was unable to startup because starting the jruby engine resulted in:\n" + e.getMessage());
             for (int i = 0; i < e.getStackTrace().length; i++) {
                 console.error("\n" + e.getStackTrace()[i]);
             }
             throw new RuntimeException(e);
+        }
+    }
+
+    private static void guardForDodgyJrubyHome() throws URISyntaxException {
+        URL resource = JRubyInterpreter.class.getResource("/META-INF/jruby.home/bin/jruby");
+        try {
+            resource.toURI();
+        } catch (URISyntaxException e) {
+            throw new URISyntaxException("\n\nThe underyling issues was; " + e.getMessage(),
+                "It looks like your intellij settings directory contains a funny character - probably a space. \n" +
+                "JRuby does not like this, please relocate it to a directory that does not contain funny characters\n" +
+                "\nFYI, jruby home was: " + resource);
         }
     }
 }

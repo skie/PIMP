@@ -11,10 +11,6 @@ class Filepath
     File.open(@filepath,'w') {|f| f.puts lines }
   end
 
-  def to_s
-    @filepath
-  end
-
   def ends?(value)
     match(/.*\/(.*?)#{value}$/)
   end
@@ -32,6 +28,18 @@ class Filepath
     #TODO: blow up if text not in filepath
     index = @filepath.index(text)
     @filepath[index..-1].to_s
+  end
+
+  def extension
+    name.include?('.') ? name.split('.').last : ''
+  end
+
+  def replace(old, new)
+    Filepath.new(@filepath.sub(old, new))
+  end
+
+  def to_s
+    @filepath
   end
 
   private

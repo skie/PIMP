@@ -9,9 +9,10 @@ load 'lib/files.rb'
 load 'lib/find_in_files.rb'
 load 'lib/find_result.rb'
 load 'lib/navigator.rb'
-load 'lib/status_bar.rb'
+load 'lib/refresh.rb'
 load 'lib/run.rb'
 load 'lib/run_configuration.rb'
+load 'lib/status_bar.rb'
 
 PMIP_CORE_VERSION = '0.2.1'
 

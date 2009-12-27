@@ -41,6 +41,7 @@ public class StartupScript implements Script {
             "  begin",
             "    puts \"\\nLoading plugin #{name}:\"",
             "    dir = Dir.pwd + \"/plugins/#{name}\"",
+            "    $plugin = name",
             mkdirIfRequired("dir"),
             createScriptIfRequired("dir + " + singleQuote("/init.rb"), MISSING_INIT_RB_SCRIPT),
             mkdirIfRequired("dir + " + singleQuote("/lib")),
@@ -49,6 +50,8 @@ public class StartupScript implements Script {
             "  rescue => e",
             "    message = [e.message] + e.backtrace",
             "    puts \"\\nAn Error occured loading plugin:\n  #{message.join(\"\n  \")}\"",
+            "  ensure",
+            "    $plugin = nil",
             "  end",
             "end")
             , "\n");

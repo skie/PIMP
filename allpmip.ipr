@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project relativePaths="false" version="4">
+  <component name="AntConfiguration">
+    <defaultAnt bundledAnt="true" />
+  </component>
   <component name="BuildJarProjectSettings">
     <option name="BUILD_JARS_ON_MAKE" value="false" />
   </component>
@@ -382,7 +385,7 @@
     <find-history />
   </component>
   <component name="libraryTable">
-    <library name="lib">
+    <library name="shipped">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/host/lib/bsh-2.0b4.jar!/" />
         <root url="jar://$PROJECT_DIR$/host/lib/jedi_2.7.1.jar!/" />

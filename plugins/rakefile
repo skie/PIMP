@@ -1,0 +1,36 @@
+require 'rake'
+
+include FileUtils
+
+plugin = 'core'
+
+VER = "PMIP-#{plugin}-" + '0.2.1'
+BUILD = 'build'
+ROOT = BUILD + '/' + VER
+DIRS = ["#{plugin}"]
+FILES = ['../host/license.txt']
+
+task :default => [:build, :zip]
+
+task :build do
+  clean
+  mkdir_p ROOT + "/#{plugin}"
+  DIRS.each{|d| cp_r d, "#{ROOT}/#{d}" }
+  FILES.each{|f| cp f, ROOT + "/#{plugin}/#{plugin}"}
+  Dir.glob("#{ROOT}/**/.svn/") {|f| rm_r f }
+end
+
+task :zip do
+  chdir BUILD + '/' + VER + "/#{plugin}" do
+    sh "zip -r ../../#{VER}.zip #{plugin}"
+  end
+  clean
+end
+
+def clean
+  begin
+    rm_r ROOT
+  rescue => e
+    puts e
+  end
+end

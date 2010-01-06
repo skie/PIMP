@@ -14,7 +14,7 @@ class FindInFiles
     lines.size.times do |i|
       content = lines[i]
       if content =~ pattern
-        results << FindResult.new(f, i, lines[i].index(name) + name.length / 2, name, content)
+        results << FindResult.new(f, i, lines[i].index(pattern) + name.length / 2, name, content)
       end
     end
     results

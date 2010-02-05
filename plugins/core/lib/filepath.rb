@@ -31,7 +31,7 @@ class Filepath
   end
 
   def extension
-    name.include?('.') ? name.split('.').last : ''
+    filename.include?('.') ? filename.split('.').last : ''
   end
 
   def replace(old, new)

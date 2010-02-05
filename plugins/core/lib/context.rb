@@ -32,6 +32,7 @@ class PMIPContext
 
   def editor_current_word
     selection_model = editor.selection_model
+    #selection_model.remove_selection
     selection_model.select_word_at_caret(false)
     word = selection_model.selected_text
     selection_model.remove_selection

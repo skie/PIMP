@@ -14,6 +14,8 @@ load 'lib/run.rb'
 load 'lib/run_configuration.rb'
 load 'lib/status_bar.rb'
 
+load 'lib/action/execute_configuration.rb'
+
 PMIP_CORE_VERSION = '0.2.3'
 
 puts "- Version: #{PMIP_CORE_VERSION}"

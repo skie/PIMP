@@ -48,6 +48,7 @@ public class JRubyInterpreter implements Interpreter {
             guardForDodgyJrubyHome();
             container = new ScriptingContainer();
             container.put("$console", console);
+            container.put("$jruby_home", jrubyHome());
             Thread.currentThread().setContextClassLoader(oldClassLoader);
 
         } catch (Exception e) {
@@ -60,7 +61,7 @@ public class JRubyInterpreter implements Interpreter {
     }
 
     private static void guardForDodgyJrubyHome() throws URISyntaxException {
-        URL resource = JRubyInterpreter.class.getResource("/META-INF/jruby.home/bin/jruby");
+        URL resource = jrubyHome();
         try {
             resource.toURI();
         } catch (URISyntaxException e) {
@@ -69,5 +70,9 @@ public class JRubyInterpreter implements Interpreter {
                 "JRuby does not like this, please relocate it to a directory that does not contain funny characters\n" +
                 "\nFYI, jruby home was: " + resource);
         }
+    }
+
+    private static URL jrubyHome() {
+        return JRubyInterpreter.class.getResource("/META-INF/jruby.home/bin/jruby");
     }
 }

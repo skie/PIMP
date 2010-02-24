@@ -12,6 +12,8 @@ class PMIPBaseAction < AnAction
 end
 
 class PMIPAction < PMIPBaseAction
+  attr_reader :result
+
   def initialize(name = "", description = nil)
     super(name, description)
   end

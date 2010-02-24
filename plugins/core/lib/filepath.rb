@@ -6,6 +6,10 @@ class Filepath
   def readlines
     IO.readlines(@filepath)
   end
+
+  def read
+    readlines.join
+  end
   
   def writelines(lines)
     File.open(@filepath,'w') {|f| f.puts lines }

@@ -14,6 +14,7 @@ class Fit
   def valid(element)
     #TODO: use filepath for this
     #.ends?(".html")
+    return false if element.virtual_file.nil?
     element.virtual_file.path.include?(PREFIX) && (element.directory? || element.virtual_file.path =~ /\.html$/)
   end
 

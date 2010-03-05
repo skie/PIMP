@@ -27,4 +27,8 @@ class Files
     scanner.scan
     scanner.included_files.collect{|f| @context.filepath_from_root(f) }
   end
+
+  def to_s
+    "\nFiles: [includes: #{@includes}, excludes: #{@excludes}]"
+  end
 end

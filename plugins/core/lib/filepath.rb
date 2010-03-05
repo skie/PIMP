@@ -15,6 +15,10 @@ class Filepath
     File.open(@filepath,'w') {|f| f.puts lines }
   end
 
+  def write(content)
+    writelines(content.split("\n"))
+  end
+
   def ends?(value)
     match(/.*\/(.*?)#{value}$/)
   end

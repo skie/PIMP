@@ -21,9 +21,7 @@ def server(port = 9319)
   puts "- Starting server on port: #{port}"
   Thread.new do
     $server = WEBrick::HTTPServer.new(:Port => port) if $server.nil?
-    $mounts.keys.each{|url|
-      $server.mount(url, $mounts[url][0], *$mounts[url][1])
-    }
+    $mounts.keys.each{|url| $server.mount(url, $mounts[url][0], *$mounts[url][1]) }
     $server.start
   end
 end

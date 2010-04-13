@@ -11,7 +11,7 @@ class Elements
       select{|e| filepath.to_s == e.virtual_file.path}
   end
 
-  def findClass(name)
+  def find_class(name)
     GotoClassModel2.new(@context.project).getElementsByName(name, false, '').to_a
   end
 end

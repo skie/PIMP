@@ -18,7 +18,7 @@ class PMIPAction < PMIPBaseAction
     super(name, description)
   end
 
-  #NOTE: this cannot be renamed ...
+  #TIP: this cannot be renamed ...
   def actionPerformed(event)
     context = PMIPContext.new
     reset_result

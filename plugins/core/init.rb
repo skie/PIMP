@@ -22,5 +22,5 @@ load 'lib/action/run_ant_task.rb'
 
 PMIP_CORE_VERSION = '0.2.3'
 
-TODO: add check to ensure that host version is good enough
+#TODO: add check to ensure that host version is good enough
 puts "- Version: #{PMIP_CORE_VERSION}"

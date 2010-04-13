@@ -9,8 +9,6 @@ class ToggleGRFeedAndRecRules < PMIPAction
       results = Elements.new(context).find_file(to)
       if results.size() == 1
         result(from.reduce("gr/") + " -> " + to.reduce("gr/"))
-        #TODO: restore only
-        #Navigator.new(context).open(only(results))
         Navigator.new(context).open(results.first)
       elsif results.size != 1
         #TODO: should prompt to create it ... a la textdox

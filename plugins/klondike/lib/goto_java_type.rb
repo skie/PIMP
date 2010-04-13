@@ -15,8 +15,8 @@ class GotoJavaType < PMIPAction
   private
 
   def find_class_or_enum_on_failure(name, context)
-    results = Elements.new(context).findClass(implementation_name(name))
-    results.empty? ? Elements.new(context).findClass(name) : results
+    results = Elements.new(context).find_class(implementation_name(name))
+    results.empty? ? Elements.new(context).find_class(name) : results
   end
 
   def implementation_name(name)

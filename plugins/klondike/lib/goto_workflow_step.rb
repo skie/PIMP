@@ -21,7 +21,7 @@ class GotoWorkflowStep < PMIPAction
   end
 
   def find_implementation(name, context)
-    found = Elements.new(context).findClass(@prefix + name)
-    !found.empty? ? found : Elements.new(context).findClass(name)
+    found = Elements.new(context).find_class(@prefix + name)
+    !found.empty? ? found : Elements.new(context).find_class(name)
   end
 end

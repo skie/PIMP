@@ -3,7 +3,6 @@ class GotoFtlMacro < PMIPAction
     if context.editor?
       name = context.editor_current_word
       pattern = /\[#macro.*#{name}.*/
-
       results = FindInFiles.new(Files.new(context).include('src/**/*.ftl')).pattern(pattern, name)
 
       if results.size == 1

@@ -1,5 +1,4 @@
 class FindUnusedFitTests < PMIPAction
-
   ACCEPTANCE_TESTS = 'acceptance-tests-'
 
   def run(event, context)

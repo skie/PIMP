@@ -18,9 +18,8 @@ class Binder
     keymap.add_shortcut(id, shortcut(key))
 
     #TODO: make constant
-    #TODO: fix naming convention
-    pmipActionGroup = action_manager.get_action("PMIP::PopupMenu")
-    pmipActionGroup.add(action)
+    pmip_action_group = action_manager.get_action("PMIP::PopupMenu")
+    pmip_action_group.add(action)
     
     puts "- Bound #{id} -> #{key}"
     self
@@ -29,6 +28,7 @@ class Binder
   private
 
   def self.shortcut(key)
+    #TODO: fix convention
     KeyboardShortcut.new(KeyStroke.get_key_stroke(key), nil)
   end
 end

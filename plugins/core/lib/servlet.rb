@@ -12,7 +12,7 @@ class PMIPServlet < WEBrick::HTTPServlet::AbstractServlet
     reset_result
     StatusBar.new(context).set("Running #{name} ...")
     track(name)
-    Run.later {
+    Run.later do
       begin
         @params = Params.new(request.query_string)
         get(request, response, context)
@@ -29,7 +29,7 @@ class PMIPServlet < WEBrick::HTTPServlet::AbstractServlet
       ensure
         waiting = false
       end
-    }
+    end
 
     while waiting
       #TODO: should there be some kind of max timeout in here
@@ -53,7 +53,6 @@ class PMIPServlet < WEBrick::HTTPServlet::AbstractServlet
     @name.nil? ? self.class.to_s : @name
   end
 
-  #TODO: is this used?
   def reset_result
     result('Nothing to do')
   end

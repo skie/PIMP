@@ -3,7 +3,6 @@ class GotoSpringBean < PMIPAction
     if context.editor?
       name = context.editor_current_word.sub(POJO_BASED, '')
       pattern = /.*class=.*#{name}.*"/
-
       results = FindInFiles.new(Files.new(context).include('src/java/**/klondikeApplicationContext*.xml')).pattern(pattern, name)
 
       if results.size == 1

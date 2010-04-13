@@ -12,7 +12,7 @@ class OpenFitResult < PMIPAction
 
   private
 
-  #TODO: fix slight bug here when its not a result and not .html - opens explorer in directory
+  #TODO: fix slight bug here when its not a result and not .html - opens explorer in directory (on windows at least)
   def result_or_source_if_missing(context, selected_test)
     result = context.filepath_from_root("build/reports/agilifier/" + selected_test)
     result.exist? && result.ends?(".html") ? result.to_s : context.filepath_from_root(Fit::PREFIX + selected_test).to_s

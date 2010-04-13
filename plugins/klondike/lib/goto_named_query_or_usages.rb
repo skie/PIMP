@@ -27,7 +27,6 @@ class GotoNamedQueryOrUsages < PMIPAction
   def goto_query(context)
     name = context.editor_current_word
     pattern = /<.*?query.*?name="#{name}".*/
-
     results = FindInFiles.new(Files.new(context).include('src/**/*.xml')).pattern(pattern, name)
 
     if results.size == 1

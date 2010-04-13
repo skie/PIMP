@@ -14,12 +14,10 @@ class RunConfiguration
       raise "Configuration error, expected to find 1 run configuration called: " + name + ", but found #{run_configurations.size}"
     end
 
-    #TODO: should be .first
     runner_manager.set_selected_configuration(runner_manager.get_settings(run_configurations.first))
     self
   end
 
-  #TODO: should probably have run() and debug() methods
   def run(action, presentation)
     Run.read_action { ActionManager.instance.get_action(action).action_performed(AnActionEvent.new(nil, DataManager.instance.data_context, "", presentation, ActionManager.instance, 0)) }
   end

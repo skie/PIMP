@@ -15,8 +15,10 @@ load 'lib/run.rb'
 load 'lib/run_configuration.rb'
 load 'lib/servlet.rb'
 load 'lib/status_bar.rb'
+load 'lib/tracker.rb'
 
 load 'lib/action/execute_configuration.rb'
+load 'lib/action/run_ant_task.rb'
 
 PMIP_CORE_VERSION = '0.2.3'
 

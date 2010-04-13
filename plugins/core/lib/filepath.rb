@@ -4,7 +4,7 @@ class Filepath
   end
 
   def readlines
-    IO.readlines(@filepath)
+    exist? ? IO.readlines(@filepath) : []
   end
 
   def read

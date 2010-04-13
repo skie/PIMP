@@ -20,9 +20,10 @@ class PMIPAction < PMIPBaseAction
 
   #NOTE: this cannot be renamed ...
   def actionPerformed(event)
-    reset_result
     context = PMIPContext.new
+    reset_result
     StatusBar.new(context).set("Running #{name} ...")
+    track(name)
     begin
       run(event, context)
       message = "#{name}: #{@result}"

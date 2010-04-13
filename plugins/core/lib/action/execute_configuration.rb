@@ -7,7 +7,7 @@ class ExecuteConfiguration < PMIPAction
   end
 
   def run(event, context)
-    result("Running ...")
+    result('Running ...')
     RunConfiguration.new(context).choose(@configuration).run(@action, event.presentation)
   end
 end

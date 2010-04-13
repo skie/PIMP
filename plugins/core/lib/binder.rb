@@ -5,6 +5,7 @@ import javax.swing.KeyStroke;
 
 class Binder
   def self.bind(key, action)
+    key.sub!('banana', 'ctrl alt shift')
     action_manager = ActionManager.instance
     keymap = KeymapManager.instance.active_keymap
 

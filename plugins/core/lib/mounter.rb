@@ -16,6 +16,7 @@ def mount(url, servlet, *args)
 end
 
 #TODO: pull out server into another class?
+#TODO: clear out mounts once bound, so support multiple servers
 def server(port = 9319)
   puts "- Starting server on port: #{port}"
   Thread.new do

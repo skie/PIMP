@@ -6,6 +6,7 @@ class StatusBar
   end
 
   def set(message)
-    WindowManager.instance.get_status_bar(@context.project).set_info(message)
+    status_bar = WindowManager.instance.get_status_bar(@context.project)
+    status_bar.set_info(message) unless status_bar.nil?
   end
 end

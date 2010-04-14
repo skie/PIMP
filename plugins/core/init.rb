@@ -19,6 +19,7 @@ load 'lib/tracker.rb'
 
 load 'lib/action/execute_command.rb'
 load 'lib/action/execute_configuration.rb'
+load 'lib/action/open_url.rb'
 load 'lib/action/run_ant_target.rb'
 
 PMIP_CORE_VERSION = '0.2.3'

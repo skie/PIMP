@@ -1,4 +1,4 @@
-class RunAntTask < PMIPAction
+class RunAntTarget < PMIPAction
   def initialize(task, name="#{self.class.to_s}: #{task}")
     super(name)
     @task = task

@@ -1,5 +1,5 @@
 class ExecuteConfiguration < PMIPAction
-  def initialize(configuration, action = 'Run', name = "#{(action + configuration)}")
+  def initialize(configuration, action = 'Run', name = "#{action}Configuration: #{configuration}")
     super(name)
     @configuration = configuration
     @action = action

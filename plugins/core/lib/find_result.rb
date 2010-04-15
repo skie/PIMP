@@ -19,4 +19,3 @@ class FindResult
     "\n#{@filepath.filename}, [#{@line}, #{@column}] (#{@content.strip})"
   end
 end
-

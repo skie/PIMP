@@ -1,13 +1,18 @@
 import com.intellij.ide.DataManager
 import com.intellij.openapi.actionSystem.DataKeys
 import com.intellij.openapi.fileEditor.FileEditorManager
+import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.vcs.changes.ChangesUtil
 import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.PsiManager
 
 class PMIPContext
   def project
-    DataKeys::PROJECT.get_data(data_context)
+    project = DataKeys::PROJECT.get_data(data_context)
+    return project unless project.nil?
+    #TIP: the above seems to fail in intellij 9: fallback to ProjectManager
+    return ProjectManager.instance.open_projects[0] if ProjectManager.instance.open_projects.size != 0
+    raise "unable to get hold of the project"
   end
 
   def selected_psi_elements

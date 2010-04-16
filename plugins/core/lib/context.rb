@@ -36,8 +36,8 @@ class PMIPContext
   end
 
   def editor_current_word
+    return '' if !has_editor?
     selection_model = editor.selection_model
-    #selection_model.remove_selection
     selection_model.select_word_at_caret(false)
     word = selection_model.selected_text
     selection_model.remove_selection
@@ -45,6 +45,7 @@ class PMIPContext
   end
 
   def editor_current_line
+    return '' if !has_editor?
     selection_model = editor.selection_model
     start = selection_model.selection_start
     finish = selection_model.selection_end
@@ -61,11 +62,14 @@ class PMIPContext
   end
 
   def editor
-#    isTrue(isEditor(), "context must be an editor", isEditor());
     FileEditorManager.get_instance(project).selected_text_editor
   end
   
   private
+
+  def has_editor?
+    !editor.nil?
+  end
 
   #TODO: maybe whack this
   def filepath_for(filename)

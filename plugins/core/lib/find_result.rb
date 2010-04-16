@@ -16,6 +16,6 @@ class FindResult
   end
 
   def to_s
-    "\n#{@filepath.filename}, [#{@line}, #{@column}] (#{@content.strip})"
+    "\n[#{@filepath.filename}, (#{@line}, #{@column}), \"#{@content.strip}\"]"
   end
 end

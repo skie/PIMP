@@ -11,3 +11,4 @@ bind 'alt shift S', GotoCss.new
 
 #TODO: a bit iffy in chrome ... seems to need a restart
 #bind 'banana P', ExecuteCommand.new('regedit /s useUBSProxySettings.reg', context.filepath_from_root('tools'), 'Restore Browser Proxy')
+#bind 'banana R', OpenURL.new('http://localhost:9319', 'View Unit Test Results')

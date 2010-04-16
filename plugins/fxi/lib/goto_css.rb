@@ -12,7 +12,7 @@ class GotoCss < PMIPAction
     else
       result = results.first
       result("found #{results.size} usages of css: #{css}#{results}")
-      result.navigate_to(context)
+      result.navigate_to(context).highlight_word
     end
   end
 end

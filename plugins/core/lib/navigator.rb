@@ -20,5 +20,12 @@ class Navigator
     editor.getScrollingModel.disableAnimation
     editor.getScrollingModel.scrollTo(position, ScrollType::CENTER)
     editor.getScrollingModel.enableAnimation
+    self
+  end
+
+  def highlight_word
+    editor = @context.editor
+    selection_model = editor.selection_model
+    selection_model.select_word_at_caret(true)
   end
 end

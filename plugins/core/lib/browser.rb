@@ -10,8 +10,8 @@ class Browser
     os_name = System.getProperty("os.name")
     if os_name =~ /^Mac OS/
       file_mgr = Class.forName("com.apple.eio.FileManager")
-      open_url = file_mgr.getDeclaredMethod("openURL", [String.class])
-      open_url.invoke(null, [url])
+      open_url = file_mgr.getDeclaredMethod("openURL", [java.lang.String.java_class].to_java(java.lang.Class))
+      open_url.invoke(nil, [url].to_java(java.lang.String))
     elsif os_name =~ /^Windows/
       `rundll32 url.dll,FileProtocolHandler #{url}`
     else

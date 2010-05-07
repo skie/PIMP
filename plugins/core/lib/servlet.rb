@@ -58,9 +58,11 @@ class PMIPServlet < WEBrick::HTTPServlet::AbstractServlet
   end
 end
 
+#TODO: pull out class (so servlet package)
 class Params
   def initialize(query)
     return if query.nil?
+    query = URI.unescape(query)
     @key_to_value = query.split('&').inject({}) do |key_to_value, pair|
       bits = pair.split('=')
       key_to_value[bits[0]] = bits[1]

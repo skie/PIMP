@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project relativePaths="false" version="4">
+<project version="4">
   <component name="AntConfiguration">
     <defaultAnt bundledAnt="true" />
     <buildFile url="file://$PROJECT_DIR$/pmip.xml">
@@ -20,13 +20,8 @@
     <scopes />
     <profiles />
   </component>
-  <component name="CodeStyleSettingsManager">
-    <option name="PER_PROJECT_SETTINGS" />
-    <option name="USE_PER_PROJECT_SETTINGS" value="false" />
-  </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
-    <option name="DEPLOY_AFTER_MAKE" value="0" />
     <resourceExtensions>
       <entry name=".+\.(properties|xml|html|dtd|tld)" />
       <entry name=".+\.(gif|png|jpeg|jpg)" />
@@ -42,6 +37,7 @@
       <entry name="?*.dtd" />
       <entry name="?*.tld" />
     </wildcardResourcePatterns>
+    <annotationProcessing enabled="false" useClasspath="true" />
   </component>
   <component name="DependenciesAnalyzeManager">
     <option name="myForwardDirection" value="false" />
@@ -74,24 +70,23 @@
   </component>
   <component name="IdProvider" IDEtalkID="69D430B2F62EDB4C90C3003E3B8E952F" />
   <component name="InspectionProjectProfileManager">
-    <option name="PROJECT_PROFILE" value="Project Default" />
-    <option name="USE_PROJECT_LEVEL_SETTINGS" value="false" />
-    <scopes />
     <profiles>
       <profile version="1.0" is_locked="false">
         <option name="myName" value="Project Default" />
         <option name="myLocal" value="false" />
-        <inspection_tool class="UnresolvedPropertyKey" level="ERROR" enabled="false" />
-        <inspection_tool class="UnusedImport" level="ERROR" enabled="true" />
-        <inspection_tool class="CyclomaticComplexity" level="WARNING" enabled="true">
-          <option name="m_limit" value="10" />
-        </inspection_tool>
-        <inspection_tool class="ClassComplexity" level="WARNING" enabled="true">
+        <inspection_tool class="ClassComplexity" enabled="true" level="WARNING" enabled_by_default="true">
           <option name="m_limit" value="80" />
         </inspection_tool>
+        <inspection_tool class="CyclomaticComplexity" enabled="true" level="WARNING" enabled_by_default="true">
+          <option name="m_limit" value="10" />
+        </inspection_tool>
+        <inspection_tool class="UnresolvedPropertyKey" enabled="false" level="ERROR" enabled_by_default="false" />
+        <inspection_tool class="UnusedImport" enabled="true" level="ERROR" enabled_by_default="true" />
       </profile>
     </profiles>
-    <list size="0" />
+    <option name="PROJECT_PROFILE" value="Project Default" />
+    <option name="USE_PROJECT_PROFILE" value="true" />
+    <version value="1.0" />
   </component>
   <component name="JavacSettings">
     <option name="DEBUGGING_INFO" value="true" />
@@ -254,11 +249,6 @@
   </component>
   <component name="ProjectDetails">
     <option name="projectName" value="PMIP" />
-  </component>
-  <component name="ProjectFileVersion" converted="true">
-    <converter id="javaee-modules" />
-    <converter id="ror-modules" />
-    <converter id="SelenaRunConfToDiana" />
   </component>
   <component name="ProjectModuleManager">
     <modules>

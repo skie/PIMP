@@ -31,6 +31,10 @@ class Filepath
     @filepath.split('/').last
   end
 
+  def path
+    Path.new(@filepath.sub(filename, ''))
+  end
+
   #TODO: not a good name, and probably shouldn't be on filepath
   def reduce(text)
     #TODO: blow up if text not in filepath

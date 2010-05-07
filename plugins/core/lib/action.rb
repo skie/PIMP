@@ -7,10 +7,10 @@ class PMIPBaseAction < AnAction
   end
 
   def name
-    "" == @name ? mangle(self.class.to_s) : @name
+    "" == @name ? mangle_name(self.class.to_s) : @name
   end
 
-  def mangle(name)
+  def mangle_name(name)
     name.gsub(/::/, '/').gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').gsub(/([a-z\d])([A-Z])/,'\1 \2')
   end
 end

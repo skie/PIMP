@@ -1,4 +1,5 @@
 load 'lib/action.rb'
+load 'lib/balloon.rb'
 load 'lib/binder.rb'
 load 'lib/browser.rb'
 load 'lib/context.rb'

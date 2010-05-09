@@ -7,7 +7,10 @@ class ExecuteCommand < PMIPAction
 
   def run(event, context)
     result('Running ...')
-    #TODO: obviously this is windows only currently
-    Run.later { `start /D#{@path.to_s.gsub('/', "\\")} #{@command}` }
+    if OS.windows?
+      Run.later { `start /D#{@path.to_s.gsub('/', "\\")} #{@command}` }
+    else
+      raise "Not currently supported on: #{OS.name}"
+    end
   end
 end

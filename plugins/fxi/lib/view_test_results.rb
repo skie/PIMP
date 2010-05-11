@@ -16,8 +16,8 @@ class ViewTestResults
     #TODO: find a nicer way to do this, ideally a pattern or something
     mount '/alltests-errors.html', MangleTestResults, {:Path => results, :Port => port, :File => 'alltests-errors.html'}
     mount '/alltests-fails.html', MangleTestResults, {:Path => results, :Port => port, :File => 'alltests-fails.html'}
-    mount '/', WEBrick::HTTPServlet::FileHandler, results
-    mount '/assets', WEBrick::HTTPServlet::FileHandler, context.root + '/pmip/plugins/fxi/assets'
+    mount '/', NonCachingFileHandler, results
+    mount '/assets', NonCachingFileHandler, context.root + '/pmip/plugins/fxi/assets'
 
     server port
   end

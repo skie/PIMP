@@ -1,3 +1,4 @@
+load 'lib/find_flaky_tests.rb'
 load 'lib/goto_css.rb'
 load 'lib/toggle_chevron_tech.rb'
 load 'lib/view_test_results.rb'
@@ -13,6 +14,7 @@ bind 'banana I', ExecuteConfiguration.new('GWT Investor Server (real services)',
 bind 'banana X', ExecuteCommand.new('fx.bat', context.root, 'Run FX.bat')
 bind 'alt shift S', GotoCss.new
 bind 'banana R', OpenURL.new("http://localhost:#{port}", 'View Test Results')
+bind 'banana F', FindFlakyTests.new
 
 #TODO: is a general comment in/out line?
 bind 'banana COMMA', ToggleChevronTech.new(

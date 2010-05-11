@@ -18,7 +18,7 @@ load 'lib/run.rb'
 load 'lib/run_configuration.rb'
 load 'lib/servlet.rb'
 load 'lib/status_bar.rb'
-load 'lib/tracker.rb'
+load 'lib/stats.rb'
 
 load 'lib/action/execute_command.rb'
 load 'lib/action/execute_configuration.rb'

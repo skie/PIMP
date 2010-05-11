@@ -6,6 +6,7 @@ import javax.swing.KeyStroke;
 #TODO: consider holding onto all actions and keys - like mount, so they can be cleanly removed
 
 class Binder
+  #TODO: add support for not binding to a shortcut
   def self.bind(key, action)
     key.sub!('banana', 'ctrl alt shift')
     keymap = KeymapManager.instance.active_keymap
@@ -21,6 +22,7 @@ class Binder
     pmip_action_group = action_manager.get_action("PMIP::PopupMenu")
     pmip_action_group.add(action)
     
+    #TODO: show usages stats next to action ...
     puts "- Bound #{id} -> #{key}"
     self
   end

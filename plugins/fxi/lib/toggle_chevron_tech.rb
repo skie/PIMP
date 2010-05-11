@@ -1,8 +1,9 @@
 class ToggleChevronTech < PMIPAction
-  def initialize(interesting_line, pattern, name)
+  def initialize(interesting_line, pattern, sound, name)
     super(name)
     @interesting_line = interesting_line
     @pattern = pattern
+    @sound = sound
   end
 
   def run(event, context)
@@ -31,5 +32,6 @@ class ToggleChevronTech < PMIPAction
   def report(status, context)
     result(status)
     Balloon.new(context).info(name + ": " + status)
+    Sound.play(@sound)
   end
 end

@@ -16,16 +16,16 @@ bind 'alt shift S', GotoCss.new
 bind 'banana R', OpenURL.new("http://localhost:#{port}", 'View Test Results')
 bind 'banana F', FindFlakyTests.new
 
+toggle_sound = context.root + '/pmip/plugins/fxi/assets/sheep.wav'
+
 #TODO: is a general comment in/out line?
 bind 'banana COMMA', ToggleChevronTech.new(
   'System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n" + responseXml);',
-  'src/java/**/WorkbenchResponse.java',
-  'Toggle Response Chevron Tech')
+  'src/java/**/WorkbenchResponse.java', toggle_sound, 'Toggle Response Chevron Tech')
 
 bind 'banana PERIOD', ToggleChevronTech.new(
   'System.out.println("\n\n>>>>>>>>>>>>>>>>>>>>>>>>>>"+new java.util.Date()+"\n\n" + request);',
-  'src/java/**/WorkbenchRequest.java',
-  'Toggle Request Chevron Tech')
+  'src/java/**/WorkbenchRequest.java', toggle_sound, 'Toggle Request Chevron Tech')
 
 #TODO: a bit iffy in chrome ... seems to need manual intervention
 bind 'banana P', ExecuteCommand.new('regedit /s useUBSProxySettings.reg', context.filepath_from_root('tools'), 'Restore Browser Proxy')

@@ -22,8 +22,7 @@ class Binder
     pmip_action_group = action_manager.get_action("PMIP::PopupMenu")
     pmip_action_group.add(action)
     
-    #TODO: show usages stats next to action ...
-    puts "- Bound #{id} -> #{key}"
+    puts "- Bound #{id} -> #{key} #{render_usages(id)}"
     self
   end
 
@@ -32,6 +31,11 @@ class Binder
   def self.shortcut(key)
     #TODO: fix convention
     KeyboardShortcut.new(KeyStroke.get_key_stroke(key), nil)
+  end
+
+  def self.render_usages(id)
+    count = usages(id)
+    count == 0 ? '' : "(#{count})"
   end
 end
 

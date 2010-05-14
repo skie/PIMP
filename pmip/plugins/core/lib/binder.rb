@@ -3,10 +3,10 @@ import com.intellij.openapi.actionSystem.KeyboardShortcut
 import com.intellij.openapi.keymap.KeymapManager
 import javax.swing.KeyStroke;
 
-#TODO: consider holding onto all actions and keys - like mount, so they can be cleanly removed
+PMIP_MENU = "PMIP::PopupMenu"
 
+#TODO: consider holding onto all actions and keys - like mount, so they can be cleanly removed
 class Binder
-  #TODO: add support for not binding to a shortcut
   def self.bind(key, action)
     key.sub!('banana', 'ctrl alt shift')
     keymap = KeymapManager.instance.active_keymap
@@ -14,15 +14,14 @@ class Binder
     id = action.name
     action_manager = ActionManager.instance
     action_manager.unregister_action(id)
-    keymap.remove_shortcut(id, shortcut(key))
+    keymap.remove_shortcut(id, shortcut(key)) unless key == ''
     action_manager.register_action(id, action)
-    keymap.add_shortcut(id, shortcut(key))
+    keymap.add_shortcut(id, shortcut(key)) unless key == ''
 
-    #TODO: make constant
-    pmip_action_group = action_manager.get_action("PMIP::PopupMenu")
+    pmip_action_group = action_manager.get_action(PMIP_MENU)
     pmip_action_group.add(action)
-    
-    puts "- Bound #{id} -> #{key} #{render_usages(id)}"
+    key_binding = key == '' ? '' : " -> #{key} " 
+    puts "- Bound #{id}#{key_binding}#{render_usages(id)}"
     self
   end
 
@@ -40,12 +39,12 @@ class Binder
   end
 end
 
-def bind(key, action)
-  Binder.bind(key, action)
+def bind(key, action='')
+  #TIP: yikes, nasty, if only one param then assume its an action without a key
+  action == '' ? Binder.bind('', key) : Binder.bind(key, action)
 end
 
-#TODO: make constant
 #TODO: add $plugin namespace support
 action_manager = ActionManager.instance
-pmip_action_group = action_manager.getAction("PMIP::PopupMenu")
+pmip_action_group = action_manager.getAction(PMIP_MENU)
 pmip_action_group.remove_all

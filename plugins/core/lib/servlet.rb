@@ -6,7 +6,35 @@ class PMIPServlet < WEBrick::HTTPServlet::AbstractServlet
     @args = args
   end
 
+  def self.get_instance(config, *options)
+    #TODO: only do this in dev mode ....
+    #puts "reloading servlet: #{self}"
+    load __FILE__
+    self.new(config, *options)
+  end
+
   def do_GET(request, response)
+    with(request, response) {|context| get(request, response, context) }
+  end
+
+  def do_POST(request, response)
+    with(request, response) {|context| post(request, response, context) }
+  end
+
+  protected
+
+  def result(result)
+    @result = result.is_a?(Array) ? result.join(', ') : result.to_s
+    @result
+  end
+
+  def params
+    @params
+  end
+
+  private
+
+  def with(request, response, &blk)
     waiting = true
     context = PMIPContext.new
     reset_result
@@ -14,8 +42,8 @@ class PMIPServlet < WEBrick::HTTPServlet::AbstractServlet
     track(name)
     Run.later do
       begin
-        @params = Params.new(request.query_string)
-        get(request, response, context)
+        @params = Params.new(request.query)
+        blk.call(context)
         response.status = 200
         message = "#{name}: #{@result}"
         puts "- #{message}"
@@ -36,19 +64,6 @@ class PMIPServlet < WEBrick::HTTPServlet::AbstractServlet
     end
   end
 
-  protected
-
-  def result(result)
-    @result = result.is_a?(Array) ? result.join(', ') : result.to_s
-    @result
-  end
-
-  def params
-    @params
-  end
-
-  private
-
   def name
     @name.nil? ? self.class.to_s : @name
   end
@@ -62,12 +77,7 @@ end
 class Params
   def initialize(query)
     return if query.nil?
-    query = URI.unescape(query)
-    @key_to_value = query.split('&').inject({}) do |key_to_value, pair|
-      bits = pair.split('=')
-      key_to_value[bits[0]] = bits[1]
-      key_to_value
-    end
+    @key_to_value = query
   end
 
   def [](key)

@@ -33,6 +33,7 @@ class Binder
     KeyboardShortcut.new(KeyStroke.get_key_stroke(key), nil)
   end
 
+  #TOOD: remove duplication with mounter
   def self.render_usages(id)
     count = usages(id)
     count == 0 ? '' : "(#{count})"

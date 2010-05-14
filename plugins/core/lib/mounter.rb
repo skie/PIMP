@@ -1,6 +1,7 @@
 require 'webrick'
 
 $mounts = {}
+$servers = {}
 
 #TIP: borrowed from http://tobyho.com/HTTP%20Server%20in%205%20Lines%20With%20Webrick
 class NonCachingFileHandler < WEBrick::HTTPServlet::FileHandler
@@ -20,9 +21,17 @@ end
 
 class Mounter
   def self.mount(url, servlet, *args)
-    puts "- Mounted #{url} -> #{servlet}"
+    puts "- Mounted #{url} -> #{servlet} #{render_usages(servlet.to_s)}"
     $mounts[url] = [servlet, *args]
     self
+  end
+
+  private
+
+  #TOOD: remove duplication with binder
+  def self.render_usages(id)
+    count = usages(id)
+    count == 0 ? '' : "(#{count})"
   end
 end
 
@@ -34,9 +43,13 @@ end
 def server(port = 9319)
   puts "- Starting server on port: #{port}"
   Thread.new do
-    $server = WEBrick::HTTPServer.new(:Port => port) if $server.nil?
-    $mounts.keys.each{|url| $server.mount(url, $mounts[url][0], *$mounts[url][1]) }
+    $servers[port] = WEBrick::HTTPServer.new(:Port => port) if $servers[port].nil?
+    server = $servers[port]
+    $mounts.keys.each{|url|
+      server.unmount(url) 
+      server.mount(url, $mounts[url][0], *$mounts[url][1])
+    }
     $mounts.clear
-    $server.start unless $server.status == :Running
+    server.start unless server.status == :Running
   end
 end

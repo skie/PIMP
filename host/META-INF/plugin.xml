@@ -15,15 +15,19 @@
         </body>
         </html>]]>
     </description>
-    <version>0.2.2</version>
+    <version>0.2.3</version>
     <vendor logo="/pmip-16.png" email="paulallton@gmail.com" url="http://code.google.com/p/pmip/">Paul Allton</vendor>
     <change-notes>
         <![CDATA[
         <html>
         <body>
+        0.2.3
+        <UL>
+        <LI>??????
+        </UL>
         0.2.2
         <UL>
-        <LI>Finally added some instructions!
+        <LI>Finally added some instructions - see: <a href="http://code.google.com/p/pmip/">homepage</a>
         <LI>Plugin name now available during plugin loading
         </UL>
         0.2.1

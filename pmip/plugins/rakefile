@@ -4,11 +4,11 @@ include FileUtils
 
 plugin = 'core'
 
-VER = "PMIP-#{plugin}-" + '0.2.2' #should get this from core/init.rb
+VER = "PMIP-#{plugin}-" + '0.2.3' #should get this from core/init.rb
 BUILD = 'build'
 ROOT = BUILD + '/' + VER
 DIRS = ["#{plugin}"]
-FILES = ['../host/license.txt']
+FILES = ['../../host/license.txt']
 
 task :default => [:build, :zip]
 

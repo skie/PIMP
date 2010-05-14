@@ -15,7 +15,7 @@ bind 'banana X', ExecuteCommand.new('fx.bat', context.root, 'Run FX.bat')
 bind 'alt shift S', GotoCss.new
 bind 'banana R', OpenURL.new("http://localhost:#{port}", 'View Test Results')
 bind 'alt shift R', RunAntTarget.new('produce-junit-report', 'Produce JUnit Report')
-bind 'banana F', FindFlakyTests.new
+#bind 'banana F', FindFlakyTests.new
 
 toggle_sound_dir = context.root + '/pmip/plugins/fxi/assets/'
 

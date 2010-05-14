@@ -11,7 +11,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../plugins" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/../pmip">
-      <sourceFolder url="file://$MODULE_DIR$/../pmip" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../pmip/plugins" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="IDEA 9886" jdkType="IDEA JDK" />
     <orderEntry type="sourceFolder" forTests="false" />

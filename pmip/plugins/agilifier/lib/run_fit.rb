@@ -1,6 +1,6 @@
 class RunFit < PMIPAction
   def initialize(action, end_to_end)
-    super(action + "Fit" + (end_to_end ? "EndToEnd" : ""))
+    super(action + " Fit" + (end_to_end ? " End To End" : ""))
     @action = action
     @end_to_end = end_to_end
   end

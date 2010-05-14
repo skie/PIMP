@@ -1,5 +1,5 @@
-#plugin 'spike'
 plugin 'core'
 plugin 'agilifier'
 plugin 'klondike'
 plugin 'fxi'
+#plugin 'spike'

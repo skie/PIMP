@@ -11,14 +11,14 @@ load 'lib/toggle_gr_feed_and_rec_rules.rb'
 load 'lib/goto_gr_import.rb'
 load 'lib/goto_workflow_step.rb'
 
-bind 'ctrl alt shift K', ExecuteConfiguration.new('Run Klondike', 'Run', 'RunKlondike')
-bind 'ctrl alt K', ExecuteConfiguration.new('Run Klondike', 'Debug', 'DebugKlondike')
+bind 'ctrl alt shift K', ExecuteConfiguration.new('Run Klondike', 'Run', 'Run Klondike')
+bind 'ctrl alt K', ExecuteConfiguration.new('Run Klondike', 'Debug', 'Debug Klondike')
 
-bind 'ctrl alt shift Z', ExecuteConfiguration.new('Run Klondike', 'JavaRebel', 'JRebelRunKlondike')
-bind 'ctrl alt Z', ExecuteConfiguration.new('Run Klondike', 'JavaRebel Debug', 'JRebelDebugKlondike')
+bind 'ctrl alt shift Z', ExecuteConfiguration.new('Run Klondike', 'JavaRebel', 'JRebel Run Klondike')
+bind 'ctrl alt Z', ExecuteConfiguration.new('Run Klondike', 'JavaRebel Debug', 'JRebel Debug Klondike')
 
-bind 'ctrl alt shift U', ExecuteConfiguration.new('Unit Tests', 'Run')
-bind 'ctrl alt U', ExecuteConfiguration.new('Unit Tests', 'Debug')
+bind 'ctrl alt shift U', ExecuteConfiguration.new('Unit Tests', 'Run', 'Run Unit Tests')
+bind 'ctrl alt U', ExecuteConfiguration.new('Unit Tests', 'Debug', 'Debug Unit Tests')
 
 bind 'ctrl alt shift M', GotoMetaDataType.new
 bind 'ctrl alt shift J', GotoJavaType.new

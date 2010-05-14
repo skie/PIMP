@@ -1,6 +1,6 @@
 class GotoWorkflowStep < PMIPAction
   def initialize(prefix)
-    super("Goto" + prefix + "WorkflowStep")
+    super("Goto " + prefix + " Workflow Step")
     @prefix = prefix
   end
 

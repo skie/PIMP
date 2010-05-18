@@ -89,7 +89,7 @@
     <copy file="${module.pmip.basedir}/lib/jedi_2.7.1.jar" tofile="${plugin.dir.exploded}/lib/jedi_2.7.1.jar"/>
     <copy file="${module.pmip.basedir}/lib/sugar.jar" tofile="${plugin.dir.exploded}/lib/sugar.jar"/>
     <copy file="${module.pmip.basedir}/lib/bsh-2.0b4.jar" tofile="${plugin.dir.exploded}/lib/bsh-2.0b4.jar"/>
-    <copy file="${module.pmip.basedir}/lib/jruby-complete-1.4.0.jar" tofile="${plugin.dir.exploded}/lib/jruby-complete-1.4.0.jar"/>
+    <copy file="${module.pmip.basedir}/lib/jruby-complete-1.5.0.jar" tofile="${plugin.dir.exploded}/lib/jruby-complete-1.5.0.jar"/>
     <copy todir="${plugin.dir.exploded}/classes">
       <fileset dir="${module.pmip.basedir}/classes/production/PMIP"/>
     </copy>
@@ -109,7 +109,7 @@
         <attribute name="Manifest-Version" value="1.0"/>
       </manifest>
     </jar>
-    <copy file="${module.pmip.basedir}/lib/jruby-complete-1.4.0.jar" tofile="${tmp.dir.pmip}/lib/jruby-complete-1.4.0.jar"/>
+    <copy file="${module.pmip.basedir}/lib/jruby-complete-1.5.0.jar" tofile="${tmp.dir.pmip}/lib/jruby-complete-1.5.0.jar"/>
     <copy file="${module.pmip.basedir}/lib/bsh-2.0b4.jar" tofile="${tmp.dir.pmip}/lib/bsh-2.0b4.jar"/>
     <copy file="${module.pmip.basedir}/lib/sugar.jar" tofile="${tmp.dir.pmip}/lib/sugar.jar"/>
     <copy file="${module.pmip.basedir}/lib/jedi_2.7.1.jar" tofile="${tmp.dir.pmip}/lib/jedi_2.7.1.jar"/>

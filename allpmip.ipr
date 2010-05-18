@@ -273,10 +273,7 @@
   <component name="ProjectDetails">
     <option name="projectName" value="allpmip" />
   </component>
-  <component name="ProjectFileVersion" converted="true">
-    <converter id="ror-modules" />
-    <converter id="SelenaRunConfToDiana" />
-  </component>
+  <component name="ProjectFileVersion" converted="true" />
   <component name="ProjectKey">
     <option name="state" value="https://pmip.googlecode.com/svn/trunk/allpmip.ipr" />
   </component>
@@ -384,7 +381,7 @@
         <root url="jar://$PROJECT_DIR$/host/lib/bsh-2.0b4.jar!/" />
         <root url="jar://$PROJECT_DIR$/host/lib/jedi_2.7.1.jar!/" />
         <root url="jar://$PROJECT_DIR$/host/lib/sugar.jar!/" />
-        <root url="jar://$PROJECT_DIR$/host/lib/jruby-complete-1.4.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/host/lib/jruby-complete-1.5.0.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />

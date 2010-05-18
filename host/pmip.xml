@@ -158,7 +158,7 @@
   <path id="library.shipped.classpath">
     <pathelement location="${basedir}/lib/bsh-2.0b4.jar"/>
     <pathelement location="${basedir}/lib/jedi_2.7.1.jar"/>
-    <pathelement location="${basedir}/lib/jruby-complete-1.4.0.jar"/>
+    <pathelement location="${basedir}/lib/jruby-complete-1.5.0.jar"/>
     <pathelement location="${basedir}/lib/sugar.jar"/>
   </path>
   

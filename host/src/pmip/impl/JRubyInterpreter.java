@@ -1,6 +1,10 @@
 package pmip.impl;
 
 import org.jruby.embed.ScriptingContainer;
+import org.jruby.embed.LocalContextScope;
+import org.jruby.embed.LocalVariableBehavior;
+import static org.jruby.embed.LocalVariableBehavior.*;
+import static org.jruby.embed.LocalContextScope.*;
 import pmip.Console;
 import pmip.Interpreter;
 
@@ -46,7 +50,7 @@ public class JRubyInterpreter implements Interpreter {
             ClassLoader oldClassLoader = Thread.currentThread().getContextClassLoader();
             Thread.currentThread().setContextClassLoader(null);
             guardForDodgyJrubyHome();
-            container = new ScriptingContainer();
+            container = new ScriptingContainer(SINGLETON, TRANSIENT, null);
             container.put("$console", console);
             container.put("$jruby_home", jrubyHome());
             Thread.currentThread().setContextClassLoader(oldClassLoader);
@@ -73,6 +77,6 @@ public class JRubyInterpreter implements Interpreter {
     }
 
     private static URL jrubyHome() {
-        return JRubyInterpreter.class.getResource("/META-INF/jruby.home/bin/jruby");
+        return JRubyInterpreter.class.getResource("/META-INF/jruby.home");
     }
 }

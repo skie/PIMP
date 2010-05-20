@@ -24,6 +24,8 @@
         0.2.3
         <UL>
         <LI>Upgraded to jruby 1.5.0
+        <LI>Resolved (hopefully!) jruby startup issue (i.e large blob of red) caused by intellij settings directory containing a space
+        <LI>jruby_home property now exposed to scripts
         </UL>
         0.2.2
         <UL>

@@ -49,7 +49,6 @@ public class JRubyInterpreter implements Interpreter {
         try {
             ClassLoader oldClassLoader = Thread.currentThread().getContextClassLoader();
             Thread.currentThread().setContextClassLoader(null);
-            guardForDodgyJrubyHome();
             container = new ScriptingContainer(SINGLETON, TRANSIENT, null);
             container.put("$console", console);
             container.put("$jruby_home", jrubyHome());
@@ -64,19 +63,7 @@ public class JRubyInterpreter implements Interpreter {
         }
     }
 
-    private static void guardForDodgyJrubyHome() throws URISyntaxException {
-        URL resource = jrubyHome();
-        try {
-            resource.toURI();
-        } catch (URISyntaxException e) {
-            throw new URISyntaxException("\n\nThe underyling issues was; " + e.getMessage(),
-                "It looks like your intellij settings directory contains a funny character - probably a space. \n" +
-                "JRuby does not like this, please relocate it to a directory that does not contain funny characters\n" +
-                "\nFYI, jruby home was: " + resource);
-        }
-    }
-
-    private static URL jrubyHome() {
-        return JRubyInterpreter.class.getResource("/META-INF/jruby.home");
+    private static String jrubyHome() {
+        return JRubyInterpreter.class.getResource("/META-INF/jruby.home").toString().replace(" ", "%20");
     }
 }

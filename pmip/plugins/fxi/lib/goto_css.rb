@@ -1,14 +1,16 @@
 class GotoCss < PMIPAction
   def run(event, context)
     line = context.editor_current_line
-    line =~ /.*CssClass\("(.*?)"\).*/
+    line =~ /.*"(.*?)".*/
     css = $1
     return if css.nil?
 
-    results = FindInFiles.new(Files.new(context).include('src/java/**/spi.css')).pattern(/#{css}/, css)
+    results = FindInFiles.new(Files.new(context).include('src/java/**/*.css')).pattern(/#{css}/, css)
 
     if results.empty?
-      result("could not find css for: #{css}, maybe it can be deleted")
+      message = "could not find css for: #{css}, maybe it can be deleted"
+      result(message)
+      Balloon.new(context).info(message)
     else
       result = results.first
       result("found #{results.size} usages of css: #{css}#{results}")

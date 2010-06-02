@@ -1,7 +1,7 @@
 require 'webrick'
 
 $mounts = {}
-$servers = {}
+$servers = {} if $servers.nil?
 
 #TIP: borrowed from http://tobyho.com/HTTP%20Server%20in%205%20Lines%20With%20Webrick
 class NonCachingFileHandler < WEBrick::HTTPServlet::FileHandler
@@ -42,14 +42,16 @@ end
 #TODO: pull out server into another class?
 def server(port = 9319)
   puts "- Starting server on port: #{port}"
+
+  $servers[port] = WEBrick::HTTPServer.new(:Port => port) if $servers[port].nil?
+  server = $servers[port]
+  $mounts.keys.each{|url|
+    server.unmount(url)
+    server.mount(url, $mounts[url][0], *$mounts[url][1])
+  }
+  $mounts.clear
+
   Thread.new do
-    $servers[port] = WEBrick::HTTPServer.new(:Port => port) if $servers[port].nil?
-    server = $servers[port]
-    $mounts.keys.each{|url|
-      server.unmount(url) 
-      server.mount(url, $mounts[url][0], *$mounts[url][1])
-    }
-    $mounts.clear
     server.start unless server.status == :Running
   end
 end

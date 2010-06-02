@@ -20,7 +20,7 @@ class Binder
 
     pmip_action_group = action_manager.get_action(PMIP_MENU)
     pmip_action_group.add(action)
-    key_binding = key == '' ? '' : " -> #{key} " 
+    key_binding = key == '' ? ' ' : " -> #{key} " 
     puts "- Bound #{id}#{key_binding}#{render_usages(id)}"
     self
   end

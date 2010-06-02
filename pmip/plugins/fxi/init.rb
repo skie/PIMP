@@ -1,5 +1,6 @@
 load 'lib/find_flaky_tests.rb'
 load 'lib/goto_css.rb'
+load 'lib/static_import_type.rb'
 load 'lib/toggle_chevron_tech.rb'
 load 'lib/view_test_results.rb'
 
@@ -15,7 +16,9 @@ bind 'banana X', ExecuteCommand.new('fx.bat', context.root, 'Run FX.bat')
 bind 'alt shift S', GotoCss.new
 bind 'banana R', OpenURL.new("http://localhost:#{port}", 'View Test Results')
 bind 'alt shift R', RunAntTarget.new('produce-junit-report', 'Produce JUnit Report')
-#bind 'banana F', FindFlakyTests.new
+bind 'banana F', FindFlakyTests.new
+bind 'banana 8', StaticImportType.new({'Matchers' => 'org.hamcrest.Matchers', 'Assert' => 'org.junit.Assert'})
+bind OptimiseTestSuite.new
 
 toggle_sound_dir = context.root + '/pmip/plugins/fxi/assets/'
 

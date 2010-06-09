@@ -4,7 +4,7 @@ class FindInFiles
   end
 
   def pattern(pattern, name)
-    @files.find.inject([]){|results, f| append_result(results, f, name, pattern)}
+    Refresh.file_system_before { @files.find.inject([]){|results, f| append_result(results, f, name, pattern)} }
   end
 
   private

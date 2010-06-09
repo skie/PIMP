@@ -12,9 +12,12 @@ class GotoCss < PMIPAction
       result(message)
       Balloon.new(context).info(message)
     else
-      result = results.first
       result("found #{results.size} usages of css: #{css}#{results}")
-      result.navigate_to(context).highlight_word
+    
+      Chooser.new("Goto css for: #{css}", results, context).
+        description{|r| "#{r.filepath.filename} (#{r.line}) - #{r.content}" }.
+        on_selected{|r| r.navigate_to(context).highlight_word }.
+        show
     end
   end
 end

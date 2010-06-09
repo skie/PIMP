@@ -26,7 +26,9 @@ load 'lib/action/execute_configuration.rb'
 load 'lib/action/open_url.rb'
 load 'lib/action/run_ant_target.rb'
 
-PMIP_CORE_VERSION = '0.2.3'
+#load 'lib/ui/chooser.rb'
+
+PMIP_CORE_VERSION = '0.3.0'
 
 #TODO: add check to ensure that host version is good enough
 puts "- Version: #{PMIP_CORE_VERSION}"

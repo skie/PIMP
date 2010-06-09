@@ -9,7 +9,7 @@ port = 9319
 
 ViewTestResults.start context, port
 
-bind 'ctrl F11', RunAntTarget.new('gwtCompile-src/java', 'Compile GWT')
+bind 'ctrl F11', RunAntTarget.new('gwt-compile-obfuscated', 'Compile GWT'), {:force => true}
 bind 'ctrl shift F11', RunAntTarget.new('deploy-gwt-css-and-images-from-intellij', 'Deploy CSS and Images')
 bind 'banana I', ExecuteConfiguration.new('GWT Investor Server (real services)', 'Run', 'Run Investor' )
 bind 'banana X', ExecuteCommand.new('fx.bat', context.root, 'Run FX.bat')

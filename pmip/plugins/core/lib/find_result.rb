@@ -1,5 +1,5 @@
 class FindResult
-  attr_reader :content
+  attr_reader :filepath, :content
   
   def initialize(filepath, line, column, name, content)
     @filepath = filepath

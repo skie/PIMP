@@ -7,20 +7,17 @@ PMIP_MENU = "PMIP::PopupMenu"
 
 #TODO: consider holding onto all actions and keys - like mount, so they can be cleanly removed
 class Binder
-  def self.bind(key, action)
+  def self.bind(key, action, force)
     key.sub!('banana', 'ctrl alt shift')
-    keymap = KeymapManager.instance.active_keymap
-
+    key_map = KeymapManager.instance.active_keymap
     id = action.name
     action_manager = ActionManager.instance
-    action_manager.unregister_action(id)
-    keymap.remove_shortcut(id, shortcut(key)) unless key == ''
-    action_manager.register_action(id, action)
-    keymap.add_shortcut(id, shortcut(key)) unless key == ''
 
-    pmip_action_group = action_manager.get_action(PMIP_MENU)
-    pmip_action_group.add(action)
-    key_binding = key == '' ? ' ' : " -> #{key} " 
+    unregister(key, action, id, force, key_map, action_manager)
+    register(key, action, id, key_map, action_manager)
+    bind_menu(action, action_manager)
+
+    key_binding = key == '' ? ' ' : " -> #{key} "
     puts "- Bound #{id}#{key_binding}#{render_usages(id)}"
     self
   end
@@ -28,8 +25,35 @@ class Binder
   private
 
   def self.shortcut(key)
-    #TODO: fix convention
-    KeyboardShortcut.new(KeyStroke.get_key_stroke(key), nil)
+    KeyboardShortcut.new(key_stroke(key), nil)
+  end
+
+  def self.key_stroke(key)
+    KeyStroke.get_key_stroke(key)
+  end
+
+  def self.bind_menu(action, action_manager)
+    pmip_action_group = action_manager.get_action(PMIP_MENU)
+    pmip_action_group.add(action)
+  end
+
+  def self.unregister(key, action, id, force, key_map, action_manager)
+    action_manager.unregister_action(id)
+
+    key_map.getActionIds(key_stroke(key)).each{|bound_id|
+      if force
+        key_map.remove_shortcut(bound_id, shortcut(key))
+      else
+        if bound_id != id
+          raise "- Unable to bind #{id} -> #{key}, because shortcut is already used by '#{bound_id}', to override use: 'bind [key_stroke], [action], {:force = true}'"
+        end
+      end
+    }
+  end
+
+  def self.register(key, action, id, key_map, action_manager)
+    action_manager.register_action(id, action)
+    key_map.add_shortcut(id, shortcut(key)) unless key == ''
   end
 
   #TOOD: remove duplication with mounter
@@ -39,9 +63,10 @@ class Binder
   end
 end
 
-def bind(key, action='')
+def bind(key, action='', options={})
+  force = options[:force] ? true : false
   #TIP: yikes, nasty, if only one param then assume its an action without a key
-  action == '' ? Binder.bind('', key) : Binder.bind(key, action)
+  action == '' ? Binder.bind('', key, force) : Binder.bind(key, action, force)
 end
 
 #TODO: add $plugin namespace support

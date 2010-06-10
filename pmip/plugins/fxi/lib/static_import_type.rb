@@ -1,5 +1,5 @@
 class StaticImportType < PMIPAction
-  def initialize(known_types)
+  def initialize(known_types={})
     super()
     @known_types = known_types
   end
@@ -8,16 +8,19 @@ class StaticImportType < PMIPAction
     Refresh.file_system
     #TODO: make it work with inner classes/enums
     type = context.editor_current_word
-    results = find_elements(type, context).collect{|t| t.qualified_name }.uniq
+    results = find_elements(type, context).collect{|t| t.qualified_name }.uniq.sort
 
     if results.empty?
       result("could not find type to static import: #{type}")
-    elsif results.size > 1
-      result("expected to find one type for: #{type}, but found: #{results.join(', ')}")
     else
-      result = results.first
-      result("added static import for: #{type}")
-      Refresh.file_system_after { mangle(context.editor_filepath, context.editor_current_line, type, result) }
+      result("found #{results.size} types for: #{type} - #{results.join(', ')}")
+
+      Chooser.new("Static import type for: #{type}", results, context).
+        description{|r| "#{r}" }.
+        on_selected{|r|
+          Refresh.file_system_after { mangle(context.editor_filepath, context.editor_current_line, type, r) }
+        }.
+        show
     end
   end
 

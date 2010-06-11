@@ -36,12 +36,10 @@ class Binder
     action_manager.unregister_action(id)
 
     keymap.action_ids(key_stroke(key)).each{|bound_id|
-      if force
-        keymap.remove_shortcut(bound_id, shortcut(key))
+      if !force && bound_id != id
+        raise "- Unable to bind #{id} -> #{key}, because shortcut is already used by '#{bound_id}', to override use: 'bind [key_stroke], [action], {:force = true}'"
       else
-        if bound_id != id
-          raise "- Unable to bind #{id} -> #{key}, because shortcut is already used by '#{bound_id}', to override use: 'bind [key_stroke], [action], {:force = true}'"
-        end
+        keymap.get_shortcuts(bound_id).each{|s| keymap.remove_shortcut(bound_id, s) }
       end
     }
   end
@@ -67,7 +65,7 @@ class Binder
 end
 
 def bind(key, action='', options={})
-  force = options[:force] ? true : false
+  force = options.has_key?(:force) ? options[:force] : true
   #TIP: yikes, nasty, if only one param then assume its an action without a key
   action == '' ? Binder.bind('', key, force) : Binder.bind(key, action, force)
 end

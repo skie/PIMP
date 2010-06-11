@@ -1,6 +1,7 @@
 class Path
   def initialize(path)
     @path = path.gsub('\\', '/')
+    @path << '/' unless path =~ /\/$/
   end
 
   def each(glob, &blk)

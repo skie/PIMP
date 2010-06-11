@@ -46,6 +46,11 @@ class Filepath
     filename.include?('.') ? filename.split('.').last : ''
   end
 
+  def base
+    index = filename.index(".#{extension}")
+    filename[0..index-1]
+  end
+
   def replace(old, new)
     Filepath.new(@filepath.sub(old, new))
   end

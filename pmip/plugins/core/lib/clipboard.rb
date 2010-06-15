@@ -1,0 +1,8 @@
+import java.awt.datatransfer.StringSelection
+import java.awt.Toolkit
+
+class Clipboard
+  def self.set(text)
+    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(StringSelection.new(text), nil)
+  end
+end

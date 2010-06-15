@@ -17,9 +17,7 @@ class StaticImportType < PMIPAction
 
       Chooser.new("Static import type for: #{type}", results, context).
         description{|r| "#{r}" }.
-        on_selected{|r|
-          Refresh.file_system_after { mangle(context.editor_filepath, context.editor_current_line, type, r) }
-        }.
+        on_selected{|r| Refresh.file_system_after { mangle(context.editor_filepath, context.editor_current_line, type, r) } }.
         show
     end
   end

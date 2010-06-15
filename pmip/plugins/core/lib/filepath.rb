@@ -35,7 +35,7 @@ class Filepath
     Path.new(@filepath.sub(filename, ''))
   end
 
-  #TODO: not a good name, and probably shouldn't be on filepath
+  #TODO: not a good name, and probably shouldn't be on filepath - get rid of me
   def reduce(text)
     #TODO: blow up if text not in filepath
     index = @filepath.index(text)

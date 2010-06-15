@@ -1,6 +1,7 @@
 load 'lib/action.rb'
 load 'lib/binder.rb'
 load 'lib/browser.rb'
+load 'lib/clipboard.rb'
 load 'lib/context.rb'
 load 'lib/elements.rb'
 load 'lib/filepath.rb'

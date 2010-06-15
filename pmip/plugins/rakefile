@@ -4,7 +4,7 @@ include FileUtils
 
 plugin = 'core'
 
-VER = "PMIP-#{plugin}-" + '0.2.3' #should get this from core/init.rb
+VER = "PMIP-#{plugin}-" + '0.3.0' #should get this from core/init.rb
 BUILD = 'build'
 ROOT = BUILD + '/' + VER
 DIRS = ["#{plugin}"]

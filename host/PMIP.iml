@@ -10,12 +10,9 @@
     <content url="file://$MODULE_DIR$/../pmip">
       <sourceFolder url="file://$MODULE_DIR$/../pmip/plugins" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="IDEA 9886" jdkType="IDEA JDK" />
+    <orderEntry type="jdk" jdkName="IDEA IU-95.66" jdkType="IDEA JDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="shipped" level="project" />
-  </component>
-  <component name="RModuleSettingsStorage">
-    <RMODULE_SETTINGS_STORAGE_ID NAME="NUMBER" VALUE="0" />
   </component>
 </module>
 

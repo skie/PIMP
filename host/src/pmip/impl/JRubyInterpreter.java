@@ -29,7 +29,7 @@ public class JRubyInterpreter implements Interpreter {
         try {
             container.runScriptlet(script);
         } catch (Exception e) {
-            console.error("\nAn error occured while evaluating the script:");
+            console.error("\nThere was an error evaluating the script:");
             console.error("\n----------------------------------------------------------------------------\n");
             console.error(script);
             console.error("\n----------------------------------------------------------------------------\n");

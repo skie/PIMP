@@ -9,18 +9,32 @@
         <![CDATA[
         <html>
         <body>
-        <p>A simple tool for scripting Intellij plugins in jruby.</p>
-        <br/>
+        <p>A simple tool for realtime rapid development of Intellij plugins in ruby. For example:</p><br>
+<pre>
+class HelloWorldAction &lt PMIPAction
+  def run(event, context)
+    Dialogs.new(context).info('Hello World', 'Hello from PMIP!')
+  end
+end
+
+bind 'ctrl alt shift A', HelloWorldAction.new
+</pre>
         <p>Please see <a href="http://code.google.com/p/pmip/">homepage</a> for full instructions, examples and plugin helper bundles.</p>
         </body>
         </html>]]>
     </description>
-    <version>0.2.3</version>
+    <version>0.3.0</version>
     <vendor logo="/pmip-16.png" email="paulallton@gmail.com" url="http://code.google.com/p/pmip/">Paul Allton</vendor>
     <change-notes>
         <![CDATA[
         <html>
         <body>
+        0.3.0
+        <UL>
+        <LI>Finally have a workaround for intellij bug that prevented PMIP from starting when intellij plugins directory contains a space
+        <LI>Core bundle updated to support many new features including: CTRL-E style choosers, playing of sounds, executing external commands
+         executing ant tasks, displaying balloons and hosting servlets.
+        </UL>
         0.2.3
         <UL>
         <LI>Upgraded to jruby 1.5.0

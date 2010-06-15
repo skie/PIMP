@@ -1,7 +1,6 @@
 load 'lib/goto_css.rb'
 load 'lib/static_import_type.rb'
 load 'lib/view_test_results.rb'
-
 load 'lib/view_chevron_tech.rb'
 
 context = PMIPContext.new
@@ -16,7 +15,6 @@ bind 'alt shift S', GotoCss.new
 bind 'banana R', OpenURL.new("http://localhost:#{port}", 'View Test Results')
 bind 'alt shift R', RunAntTarget.new('produce-junit-report', 'Produce JUnit Report')
 bind 'banana 8', StaticImportType.new({'Matchers' => 'org.hamcrest.Matchers', 'Assert' => 'org.junit.Assert'})
-
 
 log_file = context.filepath_from_root('logs/workbenchmessages.log')
 

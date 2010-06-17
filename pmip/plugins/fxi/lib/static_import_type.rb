@@ -17,7 +17,7 @@ class StaticImportType < PMIPAction
 
       Chooser.new("Static import type for: #{type}", results, context).
         description{|r| "#{r}" }.
-        on_selected{|r| Refresh.file_system_after { mangle(context.editor_filepath, context.editor_current_line, type, r) } }.
+        on_selected{|r| Refresh.file_system_after { mangle(context.editor_filepath, type, r) } }.
         show
     end
   end
@@ -33,15 +33,23 @@ class StaticImportType < PMIPAction
     end
   end
 
-  def mangle(file, line, type, qualified_type_name)
-    lines = file.readlines.collect{|l| remove_usage_of_type(l, type) }
-    lines.insert(2, "import static #{qualified_type_name}.*;")
-    file.writelines(lines)
+  def mangle(file, type, qualified_type_name)
+    file.writelines(add_static_import(qualified_type_name, remove_usages(type, file)))
+  end
+
+  def remove_usages(type, file)
+    file.readlines.collect {|l| remove_usage_of_type(l, type) }
   end
 
   def remove_usage_of_type(line, type)
      return line if line =~ /^import/
      return '' if line.strip == type
      line.sub("#{type}.", '')
+  end
+
+  def add_static_import(qualified_type_name, lines)
+    import_line = "import static #{qualified_type_name}.*;"
+    lines.insert(2, import_line) unless !lines.select { |l| l.strip == import_line }.empty?
+    lines
   end
 end

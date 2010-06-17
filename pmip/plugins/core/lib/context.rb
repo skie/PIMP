@@ -57,6 +57,11 @@ class PMIPContext
     line
   end
 
+  def editor_current_line_number
+    return -1 if !has_editor?
+    editor.caret_model.getLogicalPosition().line
+  end
+
   def root
     project.base_dir.path
   end

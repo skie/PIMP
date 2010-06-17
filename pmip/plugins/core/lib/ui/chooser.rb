@@ -80,7 +80,7 @@ class ListSelectionListener
 
   def valueChanged(event)
     if event.firstIndex == event.lastIndex
-      SwingUtilities.invokeLater(RunnableBlock.new(lambda { @preview.setText(@block.call(event)) }))
+      SwingUtilities.invokeLater(RunnableBlock.new(lambda { @preview.setText(@block.call(event).to_s) }))
     end
   end
 end
@@ -146,7 +146,7 @@ class Chooser
   end
 
   def renderer
-    RecentFilesRenderer.new(lambda {|renderer, value| renderer.append(@description_block.call(value)) })
+    RecentFilesRenderer.new(lambda {|renderer, value| renderer.append(@description_block.call(value).to_s) })
   end
 
   def callback(display_list)

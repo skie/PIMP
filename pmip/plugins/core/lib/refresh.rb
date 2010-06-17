@@ -16,4 +16,10 @@ class Refresh
      block.call
      file_system
    end
+
+   def self.file_system_before_and_after(&block)
+     file_system
+     block.call
+     file_system
+   end
 end

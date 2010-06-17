@@ -21,6 +21,6 @@ class Balloon
   private
 
   def balloon(type, message)
-    ToolWindowManager.getInstance(@context.project).notifyByBalloon('PMIP', type, message, nil, nil)
+    ToolWindowManager.getInstance(@context.project).notifyByBalloon('PMIP', type, message.capitalize, nil, nil)
   end
 end

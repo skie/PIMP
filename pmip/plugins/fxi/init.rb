@@ -1,8 +1,8 @@
 load 'lib/goto_css.rb'
 load 'lib/static_import_type.rb'
-load 'lib/view_test_results.rb'
+load 'lib/toggle_access_modifier.rb'
 load 'lib/view_chevron_tech.rb'
-
+load 'lib/view_test_results.rb'
 context = PMIPContext.new
 port = 9319
 
@@ -14,7 +14,8 @@ bind 'banana I', ExecuteConfiguration.new('GWT Investor Server (real services)',
 bind 'alt shift S', GotoCss.new
 bind 'banana R', OpenURL.new("http://localhost:#{port}", 'View Test Results')
 bind 'alt shift R', RunAntTarget.new('produce-junit-report', 'Produce JUnit Report')
-bind 'banana 8', StaticImportType.new({'Matchers' => 'org.hamcrest.Matchers', 'Assert' => 'org.junit.Assert'})
+bind 'banana 8', StaticImportType.new({'Assert' => 'org.junit.Assert'})
+bind 'banana A', ToggleAccessModifier.new
 
 log_file = context.filepath_from_root('logs/workbenchmessages.log')
 

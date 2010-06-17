@@ -10,7 +10,7 @@ class Binder
     key.sub!('banana', 'ctrl alt shift')
     id = action.name
 
-    unregister(key, action, id, force)
+    unregister(key, id, force)
     register(key, action, id)
     add_menu_item(action)
 
@@ -32,7 +32,7 @@ class Binder
     action_manager.get_action(PMIP_MENU).add(action)
   end
 
-  def self.unregister(key, action, id, force)
+  def self.unregister(key, id, force)
     action_manager.unregister_action(id)
 
     keymap.action_ids(key_stroke(key)).each{|bound_id|

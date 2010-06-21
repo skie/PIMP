@@ -1,11 +1,13 @@
  require 'yaml'
 
  class Stats
+   STATS_FILENAME = 'stats.yaml'
+
    def self.track(action)
      content = load
      content[action] = 0 if content[action].nil?
      content[action] = content[action].succ
-     filepath.write(YAML::dump(content))
+     save(content)
    end
 
    def self.usages(action)
@@ -16,12 +18,17 @@
    private
 
    def self.load
-     content = YAML::load(filepath.read)
-     content ? content : {}
+     begin
+       File.exists?(STATS_FILENAME) ? YAML::load_file(STATS_FILENAME) : {}
+     rescue => e
+       puts "Warning: unable to load stats - #{e}"
+       File.delete(STATS_FILENAME) if File.exists?(STATS_FILENAME)
+       {}
+     end
    end
 
-   def self.filepath
-     Filepath.new('stats.yaml')
+   def self.save(content)
+     File.open(STATS_FILENAME, 'w') { |f| YAML.dump(content, f) }
    end
  end
 

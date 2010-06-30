@@ -23,9 +23,17 @@ class Navigator
     self
   end
 
+  # DEPRECATED
   def highlight_word
     editor = @context.editor
     selection_model = editor.selection_model
     selection_model.select_word_at_caret(true)
+  end
+
+  # DEPRECATED
+  def highlight_line
+    editor = @context.editor
+    selection_model = editor.selection_model
+    selection_model.select_line_at_caret
   end
 end

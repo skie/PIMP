@@ -4,9 +4,9 @@ class StaticImportType < PMIPAction
     @known_types = known_types
   end
 
+  #TODO: make it work with inner classes/enums
   def run(event, context)
     Refresh.file_system
-    #TODO: make it work with inner classes/enums
     type = context.editor_current_word
     results = find_elements(type, context).collect{|t| t.qualified_name }.uniq.sort
 
@@ -44,7 +44,8 @@ class StaticImportType < PMIPAction
   def remove_usage_of_type(line, type)
      return line if line =~ /^import/
      return '' if line.strip == type
-     line.sub("#{type}.", '')
+     #TIP: the \w and \1 bit is stop var ags being removed
+     line.gsub(/#{type}\.(\w)/, '\1')
   end
 
   def add_static_import(qualified_type_name, lines)

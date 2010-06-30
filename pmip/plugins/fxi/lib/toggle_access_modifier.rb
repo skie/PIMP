@@ -4,6 +4,7 @@ class ToggleAccessModifier < PMIPAction
   PROTECTED = 'protected'
   PACKAGE = '/*package*/'
   CLASS = 'class'
+  INTERFACE = 'interface'
 
   def run(event, context)
     Refresh.file_system_before_and_after {
@@ -28,7 +29,7 @@ class ToggleAccessModifier < PMIPAction
   private
 
   def toggle_modifier(l)
-    if class?(l)
+    if class_or_interface?(l)
       #TIP: obviously won't work for inner classes .. if only we had an AST
       return l.sub(PUBLIC, PACKAGE) if public?(l)
       return l.sub(PACKAGE, PUBLIC) if package?(l)
@@ -42,7 +43,7 @@ class ToggleAccessModifier < PMIPAction
   end
 
   def make_as_private_as_possible(l)
-    if class?(l)
+    if class_or_interface?(l)
       #TIP: obviously won't work for inner classes .. if only we had an AST
       return l.sub(PUBLIC, PACKAGE) if public?(l)
     else
@@ -58,4 +59,6 @@ class ToggleAccessModifier < PMIPAction
   def package?(l); l =~ /\s*#{PACKAGE.gsub('*', '\*')}\s(.*?)/; end
   def private?(l); l =~ /\s*#{PRIVATE}\s/; end
   def class?(l); l =~ /\s#{CLASS}\s/; end
+  def interface?(l); l =~ /\s#{INTERFACE}\s/; end
+  def class_or_interface?(l); class?(l) || interface?(l); end
 end

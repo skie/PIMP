@@ -35,6 +35,7 @@ class PMIPContext
     filepath_for(editor_psi_element.virtual_file.path)  
   end
 
+  # DEPRECATED
   def editor_current_word
     return '' if !has_editor?
     selection_model = editor.selection_model
@@ -44,6 +45,7 @@ class PMIPContext
     word
   end
 
+  # DEPRECATED
   def editor_current_line
     return '' if !has_editor?
     selection_model = editor.selection_model
@@ -57,19 +59,29 @@ class PMIPContext
     line
   end
 
+  # DEPRECATED
   def editor_current_line_number
     return -1 if !has_editor?
     editor.caret_model.getLogicalPosition().line
+  end
+
+  # DEPRECATED
+  def editor_current_selection
+    return '' if !has_editor?
+    selection_model = editor.selection_model
+    selection = selection_model.selected_text
+    selection.nil? ? '' : selection
   end
 
   def root
     project.base_dir.path
   end
 
+  #TODO: make this return the editor abstraction in future
   def editor
     FileEditorManager.get_instance(project).selected_text_editor
   end
-  
+
   private
 
   def has_editor?

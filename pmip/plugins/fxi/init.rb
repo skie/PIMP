@@ -24,4 +24,5 @@ bind 'banana PERIOD', ViewChevronTech.new(ChevronConfig.request, log_file, 'Requ
 
 #TODO: a bit iffy in chrome ... seems to need manual intervention
 bind 'banana P', ExecuteCommand.new('regedit /s useUBSProxySettings.reg', context.filepath_from_root('tools'), 'Restore Browser Proxy (beta)')
+#TODO: a bit iffy ... because the window closes
 bind 'banana X', ExecuteCommand.new('fx.bat', context.root, 'Run FX.bat (beta)')

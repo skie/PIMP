@@ -12,7 +12,7 @@ class Filepath
   end
   
   def writelines(lines)
-    File.open(@filepath,'w') {|f| f.print lines }
+    File.open(@filepath, 'w') {|f| f.print lines.collect{|l| l.chomp }.join("\n") }
   end
 
   def write(content)

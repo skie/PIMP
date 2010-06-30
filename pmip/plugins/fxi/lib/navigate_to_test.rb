@@ -5,7 +5,7 @@ class NavigateToTest < PMIPServlet
       method_name = method_name_or_default_to(class_name)
 
       pattern = /.*#{method_name}.*/
-      results = FindInFiles.new(Files.new(context).include("src/test-*/**/#{class_name}.java")).pattern(pattern, class_name)
+      results = FindInFiles.new(Files.new(context).include("src/test-*/**/#{class_name}.java")).pattern(pattern, method_name)
 
       if results.size == 1
         result = results.first

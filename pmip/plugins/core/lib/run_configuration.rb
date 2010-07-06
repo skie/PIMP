@@ -19,6 +19,6 @@ class RunConfiguration
   end
 
   def run(action, presentation)
-    Run.read_action { ActionManager.instance.get_action(action).action_performed(AnActionEvent.new(nil, DataManager.instance.data_context, "", presentation, ActionManager.instance, 0)) }
+    Action.from_id(action).run(presentation)
   end
 end

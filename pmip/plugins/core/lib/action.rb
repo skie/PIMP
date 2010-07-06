@@ -1,56 +1,15 @@
-import com.intellij.openapi.actionSystem.AnAction
-
-class PMIPBaseAction < AnAction
-  def initialize(name, description, icon = nil)
-    @name = name
-    super(name(), (description.nil? ? name() : description), icon)
+class Action
+  def self.from_id(id)
+    Action.new(ActionManager.instance.getAction(id))
   end
 
-  def name
-    "" == @name ? mangle_name(self.class.to_s) : @name
-  end
-
-  def mangle_name(name)
-    name.gsub(/::/, '/').gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').gsub(/([a-z\d])([A-Z])/,'\1 \2')
-  end
-end
-
-class PMIPAction < PMIPBaseAction
-  attr_reader :result
-
-  def initialize(name = "", description = nil)
-    super(name, description)
-  end
-
-  #TIP: this cannot be renamed ...
-  def actionPerformed(event)
-    context = PMIPContext.new
-    reset_result
-    StatusBar.new(context).set("Running #{name} ...")
-    track(name)
-    begin
-      run(event, context)
-      message = "#{name}: #{@result}"
-      puts "- #{message}"
-      StatusBar.new(context).set(message)
-    rescue => e
-      message = "Error: #{e.message}:\n#{e.backtrace.join("\n")}"
-      puts message
-      Dialogs.new(context).error("PMIP Plugin Error", "PMIP encounted an error while executing the action: " + name + "\n\n" + message + "\n\nPlease contact the plugin developer!")
-      StatusBar.new(context).set(message)
-    end
-  end
-
-  protected
-
-  def result(result)
-    @result = result.is_a?(Array) ? result.join(', ') : result.to_s
-    @result
+  def run(presentation)
+    @action.action_performed(AnActionEvent.new(nil, DataManager.instance.data_context, "", presentation, ActionManager.instance, 0))
   end
 
   private
 
-  def reset_result
-    result('Nothing to do')
+  def initialize(action)
+    @action = action
   end
 end

@@ -21,17 +21,22 @@ end
 
 class Mounter
   def self.mount(url, servlet, *args)
-    puts "- Mounted #{url} -> #{servlet} #{render_usages(servlet.to_s)}"
+    puts "- Mounted #{url} -> #{servlet} #{render_usages(mangle_name(servlet.to_s))}"
     $mounts[url] = [servlet, *args]
     self
   end
 
   private
 
-  #TOOD: remove duplication with binder
+  #TODO: remove duplication with binder
   def self.render_usages(id)
     count = usages(id)
     count == 0 ? '' : "(#{count})"
+  end
+
+  #TODO: remove duplication with binder
+  def self.mangle_name(name)
+    name.gsub(/::/, '/').gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').gsub(/([a-z\d])([A-Z])/,'\1 \2')
   end
 end
 

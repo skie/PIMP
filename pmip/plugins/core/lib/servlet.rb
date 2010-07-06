@@ -39,7 +39,7 @@ class PMIPServlet < WEBrick::HTTPServlet::AbstractServlet
     context = PMIPContext.new
     reset_result
     StatusBar.new(context).set("Running #{name} ...")
-    track(name)
+    track(mangle_name(name))
     Run.later do
       begin
         @params = Params.new(request.query)
@@ -70,6 +70,13 @@ class PMIPServlet < WEBrick::HTTPServlet::AbstractServlet
 
   def reset_result
     result('Nothing to do')
+  end
+
+  private
+
+  #TODO: remove duplication with binder
+  def mangle_name(name)
+    name.gsub(/::/, '/').gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').gsub(/([a-z\d])([A-Z])/,'\1 \2')
   end
 end
 

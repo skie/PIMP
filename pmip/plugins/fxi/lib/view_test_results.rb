@@ -6,7 +6,6 @@ load 'lib/mangle_test_results.rb'
 #should focus the editor/intellij?
 #assets should be driven from context.plugin_root (when available)
 #should mangle errors as well?
-#find out why webrick often won't restart without a kick ...
 
 class ViewTestResults
   def self.start(context, port)

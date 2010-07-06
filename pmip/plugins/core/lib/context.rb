@@ -24,74 +24,22 @@ class PMIPContext
   end
 
   def filepath_from_root(filename)
-    filepath_for(root + "/" + filename)
-  end
-
-  def editor?
-    DataKeys::EDITOR.get_data(data_context) != nil
+    Filepath.new(root + "/" + filename)
   end
 
   def editor_filepath
-    filepath_for(editor_psi_element.virtual_file.path)  
-  end
-
-  # DEPRECATED
-  def editor_current_word
-    return '' if !has_editor?
-    selection_model = editor.selection_model
-    selection_model.select_word_at_caret(false)
-    word = selection_model.selected_text
-    selection_model.remove_selection
-    word
-  end
-
-  # DEPRECATED
-  def editor_current_line
-    return '' if !has_editor?
-    selection_model = editor.selection_model
-    start = selection_model.selection_start
-    finish = selection_model.selection_end
-    selection_model.select_line_at_caret
-    line = selection_model.selected_text
-    selection_model.remove_selection
-    selection_model.set_selection(start, finish)
-    #TODO: find a way to set the caret position
-    line
-  end
-
-  # DEPRECATED
-  def editor_current_line_number
-    return -1 if !has_editor?
-    editor.caret_model.getLogicalPosition().line
-  end
-
-  # DEPRECATED
-  def editor_current_selection
-    return '' if !has_editor?
-    selection_model = editor.selection_model
-    selection = selection_model.selected_text
-    selection.nil? ? '' : selection
+    Filepath.new(editor_psi_element.virtual_file.path)
   end
 
   def root
     project.base_dir.path
   end
 
-  #TODO: make this return the editor abstraction in future
-  def editor
-    FileEditorManager.get_instance(project).selected_text_editor
+  def current_editor
+    Editor.new(selected_text_editor)
   end
 
   private
-
-  def has_editor?
-    !editor.nil?
-  end
-
-  #TODO: maybe whack this
-  def filepath_for(filename)
-    Filepath.new(filename)
-  end
 
   def data_context
     DataManager.instance.data_context
@@ -109,6 +57,10 @@ class PMIPContext
     DataKeys::VIRTUAL_FILE_ARRAY.get_data(data_context) != nil
   end
 
+  def editor?
+    DataKeys::EDITOR.get_data(data_context) != nil
+  end
+
   def project_tree_psi_elements
     DataKeys::PSI_ELEMENT_ARRAY.get_data(data_context)
   end
@@ -121,7 +73,11 @@ class PMIPContext
     DataKeys::VIRTUAL_FILE_ARRAY.get_data(data_context).collect{|vf| PsiManager.get_instance(project).find_file(vf) }
   end
 
+  def selected_text_editor
+    FileEditorManager.get_instance(project).selected_text_editor
+  end
+
   def editor_psi_element
-    PsiDocumentManager.get_instance(project).get_psi_file(editor.document)
+    PsiDocumentManager.get_instance(project).get_psi_file(selected_text_editor.document)
   end
 end

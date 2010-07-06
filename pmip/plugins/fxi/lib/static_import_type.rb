@@ -7,7 +7,7 @@ class StaticImportType < PMIPAction
   #TODO: make it work with inner classes/enums
   def run(event, context)
     Refresh.file_system
-    type = context.editor_current_word
+    type = context.current_editor.word
     results = find_elements(type, context).collect{|t| t.qualified_name }.uniq.sort
 
     if results.empty?

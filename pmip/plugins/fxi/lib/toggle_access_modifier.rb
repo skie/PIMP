@@ -8,7 +8,7 @@ class ToggleAccessModifier < PMIPAction
 
   def run(event, context)
     Refresh.file_system_before_and_after {
-      line_number = context.editor_current_line_number
+      line_number = context.current_editor.line_number
       filepath = context.editor_filepath
       lines = filepath.readlines
 

@@ -1,6 +1,6 @@
 class GotoCss < PMIPAction
   def run(event, context)
-    line = context.editor_current_line
+    line = context.current_editor.line
     line =~ /.*"(.*?)".*/
     css = $1
     return if css.nil?

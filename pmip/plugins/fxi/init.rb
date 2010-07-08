@@ -1,10 +1,12 @@
 load 'lib/goto_css.rb'
 
 load 'lib/restart_investor.rb'
+load 'lib/remove_exception_from_throws_clause.rb'
 load 'lib/static_import_type.rb'
 load 'lib/toggle_access_modifier.rb'
 load 'lib/view_chevron_tech.rb'
 load 'lib/view_test_results.rb'
+
 context = PMIPContext.new
 port = 9319
 
@@ -18,6 +20,7 @@ bind 'banana R', OpenURL.new("http://localhost:#{port}", 'View Test Results')
 bind 'alt shift R', RunAntTarget.new('produce-junit-report', 'Produce JUnit Report')
 bind 'banana 8', StaticImportType.new({'Assert' => 'org.junit.Assert'})
 bind 'banana A', ToggleAccessModifier.new
+bind 'banana E', RemoveExceptionFromThrowsClause.new
 
 log_file = context.filepath_from_root('logs/workbenchmessages.log')
 

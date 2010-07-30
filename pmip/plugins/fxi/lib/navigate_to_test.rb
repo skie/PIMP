@@ -5,16 +5,16 @@ class NavigateToTest < PMIPServlet
       method_name = method_name_or_default_to(class_name)
 
       pattern = /.*#{method_name}.*/
-      results = FindInFiles.new(Files.new(context).include("src/test-*/**/#{class_name}.java")).pattern(pattern, method_name)
+      results = FindInFiles.new(Files.new.include("src/test-*/**/#{class_name}.java")).pattern(pattern, method_name)
 
       if results.empty?
         result("expected to find one class for: #{class_name}.#{method_name}")
       else
         result("found #{results.size} types for: : #{class_name}.#{method_name} - #{results.join(', ')}")
 
-        Chooser.new("Navigate to: #{class_name}.#{method_name}", results, context).
+        Chooser.new("Navigate to: #{class_name}.#{method_name}", results).
           description{|r| "#{r}" }.
-          on_selected{|r| r.navigate_to(context) }.
+          on_selected{|r| r.navigate_to; Focus.ide }.
           show
       end
     end

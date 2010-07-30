@@ -2,7 +2,7 @@ import com.intellij.execution.RunManager
 import com.intellij.openapi.actionSystem.AnActionEvent
 
 class RunConfiguration
-  def initialize(context)
+  def initialize(context = PMIPContext.new)
     @context = context
   end
 

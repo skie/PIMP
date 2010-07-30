@@ -8,14 +8,14 @@ class StaticImportType < PMIPAction
   def run(event, context)
     Refresh.file_system
     type = context.current_editor.word
-    results = find_elements(type, context).collect{|t| t.qualified_name }.uniq.sort
+    results = find_elements(type).collect{|t| t.qualified_name }.uniq.sort
 
     if results.empty?
       result("could not find type to static import: #{type}")
     else
       result("found #{results.size} types for: #{type} - #{results.join(', ')}")
 
-      Chooser.new("Static import type for: #{type}", results, context).
+      Chooser.new("Static import type for: #{type}", results).
         description{|r| "#{r}" }.
         on_selected{|r| Refresh.file_system_after { mangle(context.editor_filepath, type, r) } }.
         show
@@ -24,8 +24,8 @@ class StaticImportType < PMIPAction
 
   private
 
-  def find_elements(type, context)
-    elements = Elements.new(context).find_class(type, true)
+  def find_elements(type)
+    elements = Elements.new.find_class(type, true)
     if !@known_types.has_key?(type)
       return elements
     else

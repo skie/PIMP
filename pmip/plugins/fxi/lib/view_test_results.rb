@@ -8,7 +8,7 @@ load 'lib/mangle_test_results.rb'
 #should mangle errors as well?
 
 class ViewTestResults
-  def self.start(context, port)
+  def self.start(port, context = PMIPContext.new)
     results = context.root + '/build/results/'
 
     mount '/NavigateToTest', NavigateToTest

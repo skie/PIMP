@@ -86,7 +86,7 @@ class ListSelectionListener
 end
 
 class Chooser
-  def initialize(title, items, context)
+  def initialize(title, items, context = PMIPContext.new)
     @title = title
     @items = items
     @context = context
@@ -114,12 +114,12 @@ class Chooser
     self
   end
 
-  def show
+  def show(auto_execute_on_single_item = true)
     raise "you must provide a block for 'on_selected'" if @on_selected_block.nil?
     raise "you must provide a block for 'description'" if @description_block.nil?
 
     return if @items.empty?
-    return @on_selected_block.call(@items.first) if @items.size == 1
+    return @on_selected_block.call(@items.first) if @items.size == 1 && auto_execute_on_single_item
 
     list_model = DefaultListModel.new
     @items.each{|i| list_model.addElement(i) }

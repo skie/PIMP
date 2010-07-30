@@ -19,8 +19,9 @@ class Editor
 
   def line
     return '' if !has_editor?
-    start = @selection_model.selection_start
-    finish = @selection_model.selection_end
+    start = selection_range.first
+    finish = selection_range.last
+    #TIP: do not inline start and finish, the next line changes the state
     @selection_model.select_line_at_caret
     line = @selection_model.selected_text
     @selection_model.remove_selection
@@ -32,6 +33,10 @@ class Editor
   def line_number
     return -1 if !has_editor?
     @caret_model.getLogicalPosition().line
+  end
+
+  def selection_range
+    (@selection_model.selection_start..@selection_model.selection_end)
   end
 
   def selection

@@ -11,11 +11,11 @@ class ViewChevronTech < PMIPAction
     if results.empty?
       message = "could not find any #{@config.kind}s in #{@filepath}"
       result(message)
-      Balloon.new(context).info(message)
+      Balloon.new.info(message)
     else
       result("found #{results.size} #{@config.kind}s in #{@filepath}")
 
-      Chooser.new("Choose a #{@config.kind} to copy to the clipboard ...", results, context).
+      Chooser.new("Choose a #{@config.kind} to copy to the clipboard ...", results).
         description{|r| r.summarise }.
         preview_box{|r| r.content }.
         on_selected{|r| Clipboard.set(r.content) }.

@@ -1,7 +1,7 @@
 import org.apache.tools.ant.DirectoryScanner
 
 class Files
-  def initialize(context)
+  def initialize(context = PMIPContext.new)
     @context = context
     @includes = []
     @excludes = []

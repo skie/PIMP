@@ -1,7 +1,7 @@
 import com.intellij.openapi.wm.WindowManager
 
 class StatusBar
-  def initialize(context)
+  def initialize(context = PMIPContext.new)
     @context = context
   end
 

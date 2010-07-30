@@ -1,5 +1,5 @@
 class Navigator
-  def initialize(context)
+  def initialize(context = PMIPContext.new)
     @context = context
   end
 

@@ -13,7 +13,7 @@ class FindResult
     "#{@name} -> #{@filepath.filename} (#{@line})"
   end
 
-  def navigate_to(context)
+  def navigate_to(context = PMIPContext.new)
     Navigator.new(context).open(Elements.new(context).find_file(@filepath).first).move_to(@line, @column)
   end
 

@@ -2,7 +2,7 @@ import com.intellij.openapi.wm.ToolWindowManager
 import com.intellij.openapi.ui.MessageType
 
 class Balloon
-  def initialize(context)
+  def initialize(context = PMIPContext.new)
     @context = context
   end
 

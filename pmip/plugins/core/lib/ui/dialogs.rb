@@ -1,7 +1,7 @@
 import com.intellij.openapi.ui.Messages
 
 class Dialogs
-   def initialize(context)
+   def initialize(context = PMIPContext.new)
     @project = context.project
    end
 

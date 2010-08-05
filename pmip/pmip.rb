@@ -1,5 +1,6 @@
 plugin 'core'
 plugin 'agilifier'
 plugin 'bookmarklets'
+plugin 'imagedifftech'
 plugin 'fxi'
 plugin 'klondike'

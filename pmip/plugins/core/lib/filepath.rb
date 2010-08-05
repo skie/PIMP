@@ -1,6 +1,6 @@
 class Filepath
   def initialize(filepath)
-    @filepath = filepath.gsub('\\', '/')
+    @filepath = filepath.gsub('\\', '/').gsub('//', '/')
   end
 
   def readlines
@@ -17,6 +17,20 @@ class Filepath
 
   def write(content)
     writelines(content.split("\n"))
+  end
+
+  def delete
+    File.delete(@filepath) if exist?
+  end
+
+  def move_to(destination_filepath)
+    FileUtils.mv(@filepath, destination_filepath.to_s)
+    destination_filepath
+  end
+
+  def copy_to(destination_filepath)
+    FileUtils.cp(@filepath, destination_filepath.to_s)
+    destination_filepath
   end
 
   def ends?(value)

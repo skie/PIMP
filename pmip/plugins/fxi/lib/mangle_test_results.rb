@@ -4,10 +4,11 @@ class MangleTestResults < PMIPServlet
     port = @args[:Port]
 
     #TODO: handle it not being there
+    #TODO: make Path be a Path
     content = Filepath.new(@args[:Path] + @args[:File]).read
 
     #TODO: make method inject ajax
-    #TODO: should be a HEREDOC
+    #TODO: should be a HEREDOC <<CONTENT
     content.sub!('</head>', "<script src=\"/assets/prototype.js\" type=\"text/javascript\"></script>
     <script language=\"javascript\" type=\"text/javascript\">
 	function goto(class_name, method_name){
@@ -37,6 +38,5 @@ class MangleTestResults < PMIPServlet
     }.join("\n")
 
     response.body = content
-    response['Content-Type'] = "text/html"
   end
 end

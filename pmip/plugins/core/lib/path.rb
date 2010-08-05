@@ -4,8 +4,12 @@ class Path
     @path << '/' unless path =~ /\/$/
   end
 
-  def each(glob, &blk)
-    Dir.glob(@path + glob).each{|f| yield Filepath.new(f) }
+  def files(glob)
+    Dir.glob(@path + glob).collect{|f| Filepath.new(f) }
+  end
+
+  def create_filepath(filename)
+    Filepath.new(@path + '/' + filename)
   end
 
   def to_s

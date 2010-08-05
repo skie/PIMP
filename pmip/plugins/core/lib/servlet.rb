@@ -7,21 +7,32 @@ class PMIPServlet < WEBrick::HTTPServlet::AbstractServlet
   end
 
   def self.get_instance(config, *options)
-    #TODO: only do this in dev mode ....
-    #puts "reloading servlet: #{self}"
+    #TIP: this is how we do a reload every-time
     load __FILE__
     self.new(config, *options)
   end
 
+  #noinspection RubyCodeStyle
   def do_GET(request, response)
     with(request, response) {|context| get(request, response, context) }
+    response.set_redirect(WEBrick::HTTPStatus::Found, @redirect) unless @redirect.nil?
   end
 
+  #noinspection RubyCodeStyle
   def do_POST(request, response)
     with(request, response) {|context| post(request, response, context) }
+    response.set_redirect(WEBrick::HTTPStatus::Found, @redirect) unless @redirect.nil?
   end
 
   protected
+
+  def redirect(url)
+    @redirect = url
+  end
+
+  def content_type(type)
+    @content_type = type
+  end
 
   def result(result)
     @result = result.is_a?(Array) ? result.join(', ') : result.to_s
@@ -36,6 +47,8 @@ class PMIPServlet < WEBrick::HTTPServlet::AbstractServlet
 
   def with(request, response, &blk)
     waiting = true
+    redirect(nil)
+    content_type('text/html')
     context = PMIPContext.new
     reset_result
     StatusBar.new(context).set("Running #{name} ...")
@@ -45,6 +58,7 @@ class PMIPServlet < WEBrick::HTTPServlet::AbstractServlet
         @params = Params.new(request.query)
         blk.call(context)
         response.status = 200
+        response['Content-Type'] = @content_type
         message = "#{name}: #{@result}"
         puts "- #{message}"
         StatusBar.new(context).set(message)

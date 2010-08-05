@@ -13,6 +13,7 @@ class NonCachingFileHandler < WEBrick::HTTPServlet::FileHandler
     res['Expires']       = Time.now - 100**4
   end
 
+  #noinspection RubyCodeStyle
   def do_GET(req, res)
     super
     prevent_caching(res)
@@ -56,7 +57,5 @@ def server(port = 9319)
   }
   $mounts.clear
 
-  Thread.new do
-    server.start unless server.status == :Running
-  end
+  Thread.new { server.start unless server.status == :Running }
 end

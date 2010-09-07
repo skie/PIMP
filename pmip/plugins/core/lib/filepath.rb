@@ -10,6 +10,10 @@ class Filepath
   def read
     readlines.join
   end
+
+  def each_line(&blk)
+    File.new(@filepath).each_line{|l| blk.call(l) }
+  end
   
   def writelines(lines)
     File.open(@filepath, 'w') {|f| f.print lines.collect{|l| l.chomp }.join("\n") }

@@ -12,9 +12,16 @@ class RunAntTarget < PMIPAction
       result('Running ...')
       Run.read_action { action_manager.get_action(results.first).action_performed(event) }
     elsif results.empty?
-      result("could not find the target: #{@task} - please ensure that it included in the ant build filter.")
+      fail("could not find the ant task: #{@task} - please ensure that the buildfile is loaded in the Ant Build tab and that the task is included in the filter.")
     else
-      result("expected to find one ant task for: #{@task}, but found: #{results}.")
+      fail("expected to find one ant task for: #{@task}, but found: #{results}.")
     end
+  end
+
+  private
+
+  def fail(message)
+    Balloon.new.error(message)
+    result(message)
   end
 end

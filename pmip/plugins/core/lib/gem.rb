@@ -1,19 +1,26 @@
+#TIP: for remote gems through proxy try  --http-proxy http://USERNAME:PASS@HOST:PORT gem_name or
+#-p http://proxy:port,
+#http://stackoverflow.com/questions/4418/how-do-i-update-ruby-gems-from-behind-a-proxy-isa-ntlm
 class Gems
-  def install(gem_filename)
-    gem_file_path = "#{Dir.pwd}/gems/#{gem_filename}"
-    raise "unable to install gem, because: '#{gem_file_path}' does not exist" unless File.exists?(gem_file_path)
-    command("install #{gem_file_path} --no-rdoc --no-ri")
+  def install(*gem_filenames)
+    fully_qualified_gem_filenames = gem_filenames.collect{|gem_filename|
+      #TODO: make path relative
+      gem_file_path = "#{Dir.pwd}/gems/#{gem_filename}"
+      raise "unable to install gem, because: '#{gem_file_path}' does not exist" unless File.exists?(gem_file_path)
+      gem_file_path
+    }
+    command("install #{fully_qualified_gem_filenames.join(' ')} --user-install --no-rdoc --no-ri", true)
   end
 
   def uninstall(gem_name)
-    command("uninstall #{gem_name} -a")
+    command("uninstall #{gem_name} -a", true)
   end
 
-  def list
-    command('list')
+  def list(print=false)
+    command('list', print)
   end
 
-  def command(args)
+  def command(args, print_result=false)
     raise "Please upgrade PMIP plugin to 0.3.0 or later" if $jruby_home.nil?
 
     gem_command = "gem #{args}"
@@ -21,10 +28,12 @@ class Gems
 
     if OS.windows?
       jgem_command = "java -jar #{jruby_jar_file} --command j#{gem_command}".gsub('/', "\\")
-      command = "cmd /c \"set GEM_HOME=#{gems_directory.gsub('/', '\\')}&&#{jgem_command}\""
-      `#{command}`
+      command = "cmd /c \"#{jgem_command}\""
+      result = `#{command} 2>&1`
+      puts result if print_result
+      result
     else
-      raise "Sorry, gem not currently supported on: #{OS.name}"
+      raise "Sorry, gems not currently supported on: #{OS.name}"
     end
   end
 
@@ -39,6 +48,6 @@ class Gems
   end
 end
 
-def gem
+def gems
   Gems.new
 end

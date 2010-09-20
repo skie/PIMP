@@ -94,7 +94,7 @@ class PMIPServlet < WEBrick::HTTPServlet::AbstractServlet
   end
 end
 
-#TODO: pull out class (so servlet package)
+#TODO: pull out class (to servlet package)
 class Params
   def initialize(query)
     return if query.nil?

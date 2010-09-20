@@ -8,6 +8,7 @@ PMIP_MENU = "PMIP::PopupMenu"
 class Binder
   def self.bind(key, action, force)
     key.sub!('banana', 'ctrl alt shift')
+    key.sub!('pear', 'ctrl shift')
     id = action.name
 
     unregister(key, id, force)

@@ -10,7 +10,7 @@ class ExecuteCommand < PMIPAction
     if OS.windows?
       Run.later { `start /D#{@path.to_s.gsub('/', "\\")} #{@command}` }
     else
-      raise "Not currently supported on: #{OS.name}"
+      Balloon.new.error("ExecuteCommand not currently supported on: #{OS.name}")
     end
   end
 end

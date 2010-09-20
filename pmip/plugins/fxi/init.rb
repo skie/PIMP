@@ -1,4 +1,6 @@
 load 'lib/goto_css.rb'
+load 'lib/micro_plugins.rb'
+
 load 'lib/restart_investor.rb'
 load 'lib/remove_exception_from_throws_clause.rb'
 load 'lib/static_import_type.rb'
@@ -13,7 +15,7 @@ port = 9319
 ViewTestResults.start port, context
 
 bind 'ctrl F11', RunAntTarget.new('gwt-compile-obfuscated', 'Compile GWT')
-bind 'ctrl shift F11', RunAntTarget.new('deploy-gwt-css-and-images-from-intellij', 'Deploy CSS and Images')
+bind 'pear F11', RunAntTarget.new('deploy-gwt-css-and-images-from-intellij', 'Deploy CSS and Images')
 bind 'banana I', RestartInvestor.new
 bind 'alt shift S', GotoCss.new
 bind 'banana R', OpenURL.new("http://localhost:#{port}", 'View Test Results')
@@ -22,7 +24,7 @@ bind 'banana 8', StaticImportType.new({'Assert' => 'org.junit.Assert'})
 bind 'banana A', ToggleAccessModifier.new
 bind 'banana E', RemoveExceptionFromThrowsClause.new
 bind 'banana U', ToggleThroughCases.new
-
+bind 'banana M', MicroPlugins.new
 
 log_file = context.filepath_from_root('logs/workbenchmessages.log')
 

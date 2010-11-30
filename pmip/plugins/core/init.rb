@@ -31,6 +31,7 @@ load 'lib/action/run_ant_target.rb'
 load 'lib/ui/balloon.rb'
 load 'lib/ui/chooser.rb'
 load 'lib/ui/dialogs.rb'
+load 'lib/ui/progress_bar.rb'
 load 'lib/ui/status_bar.rb'
 
 PMIP_CORE_VERSION = '0.3.0'

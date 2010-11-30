@@ -1,5 +1,6 @@
 plugin 'core'
-plugin 'agilifier'
+plugin 'junit'
+plugin 'fxi'
 plugin 'bookmarklets'
 plugin 'imagedifftech'
 plugin 'fxi'

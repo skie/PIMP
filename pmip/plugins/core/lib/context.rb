@@ -35,6 +35,11 @@ class PMIPContext
     project.base_dir.path
   end
 
+  def plugin_root
+    raise "plugin_root only available during plugin initialisation" if $plugin.nil?
+    "#{root}/pmip/plugins/#{$plugin}"
+  end
+
   def current_editor
     Editor.new(selected_text_editor)
   end

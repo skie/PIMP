@@ -26,18 +26,18 @@ class PMIPAction < PMIPBaseAction
   def actionPerformed(event)
     context = PMIPContext.new
     reset_result
-    StatusBar.new(context).set("Running #{name} ...")
+    StatusBar.new.set("Running #{name} ...")
     track(name)
     begin
       run(event, context)
       message = "#{name}: #{@result}"
       puts "- #{message}"
-      StatusBar.new(context).set(message)
+      StatusBar.new.set(message)
     rescue => e
       message = "Error: #{e.message}:\n#{e.backtrace.join("\n")}"
       puts message
       Dialogs.new(context).error("PMIP Plugin Error", "PMIP encounted an error while executing the action: " + name + "\n\n" + message + "\n\nPlease contact the plugin developer!")
-      StatusBar.new(context).set(message)
+      StatusBar.new.set(message)
     end
   end
 

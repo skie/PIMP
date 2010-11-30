@@ -26,11 +26,7 @@ class StaticImportType < PMIPAction
 
   def find_elements(type)
     elements = Elements.new.find_class(type, true)
-    if !@known_types.has_key?(type)
-      return elements
-    else
-      return [elements.select{|t| t.qualifiedName == @known_types[type] }.first]
-    end
+    !@known_types.has_key?(type) ? elements : [elements.select{|t| t.qualifiedName == @known_types[type] }.first]
   end
 
   def mangle(file, type, qualified_type_name)
@@ -38,7 +34,7 @@ class StaticImportType < PMIPAction
   end
 
   def remove_usages(type, file)
-    file.readlines.collect {|l| remove_usage_of_type(l, type) }
+    file.readlines.collect{|l| remove_usage_of_type(l, type) }
   end
 
   def remove_usage_of_type(line, type)
@@ -50,7 +46,7 @@ class StaticImportType < PMIPAction
 
   def add_static_import(qualified_type_name, lines)
     import_line = "import static #{qualified_type_name}.*;"
-    lines.insert(2, import_line) unless !lines.select { |l| l.strip == import_line }.empty?
+    lines.insert(2, import_line) unless !lines.select{|l| l.strip == import_line }.empty?
     lines
   end
 end

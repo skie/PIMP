@@ -1,11 +1,13 @@
 class NavigateToTest < PMIPServlet
   def get(request, response, context)
+    test_src_pattern = @args[:TestSrcPattern]
+
     if params.has_key?('class')
       class_name = params['class']
       method_name = method_name_or_default_to(class_name)
 
       pattern = /.*#{method_name}.*/
-      results = FindInFiles.new(Files.new.include("src/test-*/**/#{class_name}.java")).pattern(pattern, method_name)
+      results = FindInFiles.new(Files.new.include("#{test_src_pattern}/#{class_name}.java")).pattern(pattern, method_name)
 
       if results.empty?
         result("expected to find one class for: #{class_name}.#{method_name}")

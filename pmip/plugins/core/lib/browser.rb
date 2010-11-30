@@ -4,7 +4,7 @@ import java.lang.reflect.Method
 import java.lang.System
 
 class Browser
-  BROWSERS = ["firefox", "opera", "konqueror", "epiphany", "seamonkey", "galeon", "kazehakase", "mozilla", "netscape"]
+  BROWSERS = ["google-chrome","firefox", "opera", "konqueror", "epiphany", "seamonkey", "galeon", "kazehakase", "mozilla", "netscape"]
 
   def open(url)
     if OS.osx?
@@ -15,7 +15,7 @@ class Browser
     elsif OS.windows?
       `rundll32 url.dll,FileProtocolHandler #{url}`
     else
-      BROWSERS.each{|browser| return `#{browser} #{url}` unless `which #{browser}`.strip.empty? }
+      BROWSERS.each{|browser| return Thread.start{`#{browser} #{url}`} unless `which #{browser}`.strip.empty? }
     end
   end
 end

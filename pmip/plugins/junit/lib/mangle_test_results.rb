@@ -1,4 +1,4 @@
-#TODO: sort out disgrace
+#TODO: sort out total disgrace
 class MangleTestResults < PMIPServlet
   def get(request, response, context)
     port = @args[:Port]

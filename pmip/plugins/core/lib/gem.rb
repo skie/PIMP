@@ -1,6 +1,6 @@
-#TIP: for remote gems through proxy try  --http-proxy http://USERNAME:PASS@HOST:PORT gem_name or
-#-p http://proxy:port,
+#TIP: for remote gems through proxy try  --http-proxy http://USERNAME:PASS@HOST:PORT gem_name or -p http://proxy:port,
 #http://stackoverflow.com/questions/4418/how-do-i-update-ruby-gems-from-behind-a-proxy-isa-ntlm
+#TIP: on windows gems will be installed to C:\Documents and Settings\#{username}\.gem\jruby
 class Gems
   def install(*gem_filenames)
     fully_qualified_gem_filenames = gem_filenames.collect{|gem_filename|
@@ -12,18 +12,19 @@ class Gems
     command("install #{fully_qualified_gem_filenames.join(' ')} --user-install --no-rdoc --no-ri", true)
   end
 
-  def uninstall(gem_name)
-    command("uninstall #{gem_name} -a", true)
+  def uninstall(gem_name, args='-a')
+    command("uninstall #{gem_name} #{args}", true)
   end
 
-  def list(print=false)
-    command('list', print)
+  def list(args='', print=false)
+    command("list #{args}", print)
   end
 
   def command(args, print_result=false)
     raise "Please upgrade PMIP plugin to 0.3.0 or later" if $jruby_home.nil?
 
-    gem_command = "gem #{args}"
+    install_dir = '' #TIP: this should work, but it seems to be ignored "--install-dir=#{gems_directory}"
+    gem_command = "gem #{args} #{install_dir}"
     puts "> #{gem_command}"
 
     if OS.windows?

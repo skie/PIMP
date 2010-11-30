@@ -17,10 +17,12 @@ class Filepath
   
   def writelines(lines)
     File.open(@filepath, 'w') {|f| f.print lines.collect{|l| l.chomp }.join("\n") }
+    self
   end
 
   def write(content)
     writelines(content.split("\n"))
+    self
   end
 
   def delete

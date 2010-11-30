@@ -7,7 +7,6 @@ load 'lib/static_import_constant.rb'
 load 'lib/static_import_type.rb'
 load 'lib/toggle_access_modifier.rb'
 load 'lib/view_chevron_tech.rb'
-load 'lib/view_test_results.rb'
 load 'lib/toggle_through_cases.rb'
 
 context = PMIPContext.new

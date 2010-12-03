@@ -2,34 +2,36 @@ require 'rake'
 
 include FileUtils
 
-plugin = 'core'
+BUILD_DIR = 'build'
+COMMON_FILES = ['../../host/license.txt']
 
-VER = "PMIP-#{plugin}-" + '0.3.0' #should get this from core/init.rb
-BUILD = 'build'
-ROOT = BUILD + '/' + VER
-DIRS = ["#{plugin}"]
-FILES = ['../../host/license.txt']
+task :default => [:build_all]
 
-task :default => [:build, :zip]
-
-task :build do
-  clean
-  mkdir_p ROOT + "/#{plugin}"
-  DIRS.each{|d| cp_r d, "#{ROOT}/#{d}" }
-  FILES.each{|f| cp f, ROOT + "/#{plugin}/#{plugin}"}
-  Dir.glob("#{ROOT}/**/.svn/") {|f| rm_r f }
+task :build_all do
+  clean BUILD_DIR
+  ver = '0.4.0'
+  ['core', 'junit'].each{|plugin|
+    build(plugin, ver)
+    zip(plugin, ver)
+  }
 end
 
-task :zip do
-  chdir BUILD + '/' + VER + "/#{plugin}" do
-    sh "zip -r ../../#{VER}.zip #{plugin}"
-  end
-  clean
+def build(plugin, ver)
+  root = BUILD_DIR + "/#{plugin}-#{ver}"
+  mkdir_p root
+  cp_r plugin, root
+  COMMON_FILES.each{|f| cp f, root + "/#{plugin}"}
+  Dir.glob("#{root}/**/.svn/") {|f| rm_r f }
+  Dir.glob("#{root}/**/.DS_Store/") {|f| rm_r f }
 end
 
-def clean
+def zip(plugin, ver)
+  chdir(BUILD_DIR + "/#{plugin}-#{ver}") { sh "zip -r ../PMIP-#{plugin}-#{ver}.zip #{plugin}" }
+end
+
+def clean(dir)
   begin
-    rm_r ROOT
+    rm_r dir
   rescue => e
     puts e
   end

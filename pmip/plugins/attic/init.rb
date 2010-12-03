@@ -1,7 +1,7 @@
 load 'lib/find_flaky_tests.rb'
 load 'lib/toggle_chevron_tech.rb'
 
-toggle_sound_dir = context.root + '/pmip/plugins/fxi/assets/'
+toggle_sound_dir = PMIPContext.new.root + '/pmip/plugins/fxi/assets/'
 
 #TODO: is a general comment in/out line?
 bind 'banana COMMA', ToggleChevronTech.new(

@@ -1,4 +1,5 @@
 plugin 'core'
+plugin 'java'
 plugin 'junit'
 plugin 'fxi'
 plugin 'bookmarklets'

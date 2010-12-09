@@ -23,10 +23,12 @@ load 'lib/servlet.rb'
 load 'lib/sound.rb'
 load 'lib/stats.rb'
 
+#TODO: consistify on execute or run
 load 'lib/action/execute_command.rb'
 load 'lib/action/execute_configuration.rb'
 load 'lib/action/open_url.rb'
 load 'lib/action/run_ant_target.rb'
+load 'lib/action/run_intellij_action.rb'
 
 load 'lib/ui/balloon.rb'
 load 'lib/ui/chooser.rb'

@@ -2,10 +2,6 @@ load 'lib/goto_css.rb'
 load 'lib/micro_plugins.rb'
 
 load 'lib/restart_investor.rb'
-load 'lib/remove_exception_from_throws_clause.rb'
-load 'lib/static_import_constant.rb'
-load 'lib/static_import_type.rb'
-load 'lib/toggle_access_modifier.rb'
 load 'lib/view_chevron_tech.rb'
 load 'lib/toggle_through_cases.rb'
 
@@ -17,12 +13,9 @@ bind 'pear F11', RunAntTarget.new('deploy-gwt-css-and-images-from-intellij', 'De
 bind 'banana I', RestartInvestor.new
 bind 'alt shift S', GotoCss.new
 bind 'alt shift R', RunAntTarget.new('produce-junit-report', 'Produce JUnit Report')
-bind 'banana C', StaticImportConstant.new
-bind 'banana 8', StaticImportType.new({'Assert' => 'org.junit.Assert'})
-bind 'banana A', ToggleAccessModifier.new
-bind 'banana E', RemoveExceptionFromThrowsClause.new
 bind 'banana U', ToggleThroughCases.new
 bind 'banana M', MicroPlugins.new
+bind 'alt shift A', RunIntellijAction.new('Annotate', "Toggle Annotate")
 
 log_file = context.filepath_from_root('logs/workbenchmessages.log')
 

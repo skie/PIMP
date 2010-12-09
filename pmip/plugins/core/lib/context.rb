@@ -41,7 +41,12 @@ class PMIPContext
   end
 
   def current_editor
+    raise "there is no current editor - check first by using has_editor?" unless has_editor?
     Editor.new(selected_text_editor)
+  end
+
+  def has_editor?
+    !selected_text_editor.nil?
   end
 
   private

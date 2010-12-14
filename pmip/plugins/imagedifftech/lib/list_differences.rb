@@ -21,7 +21,7 @@ class ListDifferences < PMIPServlet
 <input name="#{RESULT}" type="submit" value="#{NOT}" title="Massive fail on my part, ignore it...">
 </form></div>
 <img style="border:1px solid black;" src="/diff/#{first}"/>
-<h4>Checked in snapshot: (mouse over/out to show/hide build version)</h4><img onmouseover="this.src='/built/#{first}'" onmouseout="this.src='/snapshot/#{first}'" style="border:1px solid black;" src="/snapshot/#{first}"/>
+<h4>Checked in snapshot: (mouse over to show your changes)</h4><img onmouseover="this.src='/built/#{first}'" onmouseout="this.src='/snapshot/#{first}'" style="border:1px solid black;" src="/snapshot/#{first}"/>
 </body></html>
 CONTENT
   end

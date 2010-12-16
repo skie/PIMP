@@ -26,7 +26,7 @@ class MicroPlugins < PMIPAction
   end
 
   def gpn(username)
-    gpns = YAML::load_file("#{Dir.pwd}\\plugins\\fxi\\gpns.yaml")
+    gpns = YAML::load_file(plugin_root + '/gpns.yaml')
     gpns.has_key?(username) ? gpns[username].to_s : Balloon.new.error("Could not find a GPN for '#{username}', please edit 'gpns.yaml'")
   end
 

@@ -12,6 +12,7 @@ class RunIntellijAction < PMIPAction
       result('Running ...')
       Run.read_action { action_manager.get_action(results.first).action_performed(event) }
     elsif results.empty?
+      puts action_manager.action_ids.sort
       fail("could not find the intellij action: #{@intellij_action}")
     else
       fail("expected to find one intellij action for: #{@intellij_action}, but found: #{results}.")

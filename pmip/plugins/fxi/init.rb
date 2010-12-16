@@ -16,12 +16,14 @@ bind 'alt shift R', RunAntTarget.new('produce-junit-report', 'Produce JUnit Repo
 bind 'banana U', ToggleThroughCases.new
 bind 'banana M', MicroPlugins.new
 bind 'alt shift A', RunIntellijAction.new('Annotate', "Toggle Annotate")
+bind 'alt shift H', RunIntellijAction.new('Vcs.ShowTabbedFileHistory', "Show History")
 
 log_file = context.filepath_from_root('logs/workbenchmessages.log')
 
 bind 'banana COMMA', ViewChevronTech.new(ChevronConfig.response, log_file, 'Response Chevron Tech')
 bind 'banana PERIOD', ViewChevronTech.new(ChevronConfig.request, log_file, 'Request Chevron Tech')
 
+context = PMIPContext.new
 #TODO: a bit iffy in chrome ... seems to need manual intervention
 bind 'banana P', ExecuteCommand.new('regedit /s useUBSProxySettings.reg', context.filepath_from_root('tools'), 'Restore Browser Proxy (beta)')
 #TODO: a bit iffy ... because the window closes

@@ -19,7 +19,7 @@ class ViewChevronTech < PMIPAction
         description{|r| r.summarise }.
         preview_box{|r| r.content }.
         on_selected{|r| Clipboard.set(r.content) }.
-        show
+        show(false)
     end
   end
 

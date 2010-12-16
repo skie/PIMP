@@ -2,9 +2,10 @@ load 'lib/list_bookmarklets.rb'
 
 class BookmarkletStore
   def self.start(port, context = PMIPContext.new)
-    assets_filepath = Path.new(context.root + '/pmip/plugins/bookmarklets/assets')
+    assets_dir = '/assets'
+    assets_filepath = Path.new(context.plugin_root + assets_dir)
 
-    mount '/assets', NonCachingFileHandler, assets_filepath.to_s
+    mount assets_dir, NonCachingFileHandler, assets_filepath.to_s
     mount '/', ListBookmarklets, {:Path => assets_filepath, :Port => port}
 
     server port

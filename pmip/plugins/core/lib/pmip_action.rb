@@ -20,6 +20,7 @@ class PMIPAction < PMIPBaseAction
 
   def initialize(name = "", description = nil)
     super(name, description)
+    @plugin_root = PMIPContext.new.plugin_root
   end
 
   #TIP: this cannot be renamed ...
@@ -48,6 +49,9 @@ class PMIPAction < PMIPBaseAction
     @result
   end
 
+  def plugin_root
+    @plugin_root
+  end
   private
 
   def reset_result

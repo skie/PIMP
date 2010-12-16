@@ -2,7 +2,7 @@ class RestartInvestor < PMIPAction
   def run(event, context)
     Run.read_action {
       Action.from_id('Stop').run(event.presentation)
-      ExecuteConfiguration.new('GWT Investor Server (real services)', 'Run', 'Run Investor').run(event, context)
+      RunConfiguration.new.choose('GWT Investor Server (real services)').run('Run', event.presentation)
       result('done')
     }
   end

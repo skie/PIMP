@@ -1,7 +1,7 @@
 begin
-import org.apache.tools.ant.DirectoryScanner
+  import org.apache.tools.ant.DirectoryScanner
 rescue => e
-  #TIP: RubyMine and PHPStorm do not seem to include and ant distribution
+  #TIP: RubyMine and PHPStorm do not seem to include an ant distribution
   require "#{PMIPContext.new.plugin_root}/ant.jar"
 end
 

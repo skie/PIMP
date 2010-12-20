@@ -22,11 +22,13 @@ class Binder
   private
 
   def self.shortcut(key)
-    KeyboardShortcut.new(key_stroke(key), nil)
+    KeyboardShortcut.new(key_stroke(key, true), nil)
   end
 
-  def self.key_stroke(key)
-    KeyStroke.get_key_stroke(key)
+  def self.key_stroke(key, strict = false)
+    key_stroke = KeyStroke.get_key_stroke(key)
+    raise "- The keystroke [#{key}] doesnt seem to be valid - please ensure that any single characters are uppercased (i.e. 'alt shift A' instead of 'alt shift a'). Consult java.awy.KeyStroke.getKeyStroke() for further information" if strict && key_stroke.nil?
+    key_stroke
   end
 
   def self.add_menu_item(action)

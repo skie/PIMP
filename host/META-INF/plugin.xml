@@ -31,7 +31,7 @@ bind 'ctrl alt shift A', HelloWorldAction.new
         <body>
         0.3.1
         <UL>
-        <LI>Refresh now clears console log
+        <LI>Refresh now clears console log.
         </UL>
         0.3.0
         <UL>

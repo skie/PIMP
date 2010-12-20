@@ -23,12 +23,16 @@ bind 'ctrl alt shift A', HelloWorldAction.new
         </body>
         </html>]]>
     </description>
-    <version>0.3.0</version>
+    <version>0.3.1</version>
     <vendor logo="/pmip-16.png" email="paulallton@gmail.com" url="http://code.google.com/p/pmip/">Paul Allton</vendor>
     <change-notes>
         <![CDATA[
         <html>
         <body>
+        0.3.1
+        <UL>
+        <LI>Refresh now clears console log
+        </UL>
         0.3.0
         <UL>
         <LI>Finally have a workaround for intellij bug that prevented PMIP from starting when intellij plugins directory contains a space

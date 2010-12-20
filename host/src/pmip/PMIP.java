@@ -79,6 +79,7 @@ public class PMIP implements ProjectComponent {
             new StartupScript().execute(interpreter);
         } else {
             interpreter.reset();
+            console.reset();
         }
 
         new ResetScript(path, pmipScript).execute(interpreter);

@@ -1,4 +1,9 @@
+begin
 import org.apache.tools.ant.DirectoryScanner
+rescue => e
+  #TIP: RubyMine and PHPStorm do not seem to include and ant distribution
+  require "#{PMIPContext.new.plugin_root}/ant.jar"
+end
 
 class Files
   def initialize(context = PMIPContext.new)

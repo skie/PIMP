@@ -36,7 +36,7 @@ load 'lib/ui/dialogs.rb'
 load 'lib/ui/progress_bar.rb'
 load 'lib/ui/status_bar.rb'
 
-PMIP_CORE_VERSION = '0.4.1'
+PMIP_CORE_VERSION = '0.4.2'
 
 #TODO: add check to ensure that host version is good enough
 puts "- Version: #{PMIP_CORE_VERSION}"

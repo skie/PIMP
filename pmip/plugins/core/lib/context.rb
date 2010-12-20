@@ -1,5 +1,6 @@
 import com.intellij.ide.DataManager
-import com.intellij.openapi.actionSystem.DataKeys
+import com.intellij.openapi.actionSystem.PlatformDataKeys
+import com.intellij.openapi.actionSystem.LangDataKeys
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.vcs.changes.ChangesUtil
@@ -8,7 +9,7 @@ import com.intellij.psi.PsiManager
 
 class PMIPContext
   def project
-    project = DataKeys::PROJECT.get_data(data_context)
+    project = PlatformDataKeys::PROJECT.get_data(data_context)
     return project unless project.nil?
     #TIP: the above seems to fail in intellij 9: fallback to ProjectManager
     return ProjectManager.instance.open_projects[0] if ProjectManager.instance.open_projects.size != 0
@@ -56,31 +57,31 @@ class PMIPContext
   end
 
   def project_tree?
-    DataKeys::PSI_ELEMENT_ARRAY.get_data(data_context) != nil
+    LangDataKeys::PSI_ELEMENT_ARRAY.get_data(data_context) != nil
   end
 
   def changes_tab?
-    DataKeys::CHANGES.get_data(data_context) != nil
+    PlatformDataKeys::CHANGES.get_data(data_context) != nil
   end
 
   def has_virtual_files?
-    DataKeys::VIRTUAL_FILE_ARRAY.get_data(data_context) != nil
+    PlatformDataKeys::VIRTUAL_FILE_ARRAY.get_data(data_context) != nil
   end
 
   def editor?
-    DataKeys::EDITOR.get_data(data_context) != nil
+    PlatformDataKeys::EDITOR.get_data(data_context) != nil
   end
 
   def project_tree_psi_elements
-    DataKeys::PSI_ELEMENT_ARRAY.get_data(data_context)
+    LangDataKeys::PSI_ELEMENT_ARRAY.get_data(data_context)
   end
 
   def changes_tab_psi_elements
-    DataKeys::CHANGES.get_data(data_context).collect{|f| ChangesUtil.get_file_path(f) }
+    PlatformDataKeys::CHANGES.get_data(data_context).collect{|f| ChangesUtil.get_file_path(f) }
   end
 
   def virtual_file_psi_elements
-    DataKeys::VIRTUAL_FILE_ARRAY.get_data(data_context).collect{|vf| PsiManager.get_instance(project).find_file(vf) }
+    PlatformDataKeys::VIRTUAL_FILE_ARRAY.get_data(data_context).collect{|vf| PsiManager.get_instance(project).find_file(vf) }
   end
 
   def selected_text_editor

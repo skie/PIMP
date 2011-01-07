@@ -52,9 +52,40 @@ class PMIPAction < PMIPBaseAction
   def plugin_root
     @plugin_root
   end
+
   private
 
   def reset_result
     result('Nothing to do')
+  end
+end
+
+import com.intellij.codeInsight.intention.IntentionAction
+
+class PMIPIntentionAction < PMIPAction
+  include IntentionAction
+
+  def invoke(project, editor, psi_file)
+    actionPerformed(nil)
+  end
+
+  #TIP: this cannot be renamed ...
+  def isAvailable(project, editor, psi_file)
+    available?(PMIPContext.new)
+  end
+
+  #TIP: this cannot be renamed ...
+  def startInWriteAction
+    true
+  end
+
+  #TIP: this cannot be renamed ...
+  def getFamilyName
+    name
+  end
+
+  #TIP: this cannot be renamed ...
+  def getText
+    describe
   end
 end

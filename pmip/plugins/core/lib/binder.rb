@@ -1,6 +1,7 @@
 import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.actionSystem.KeyboardShortcut
 import com.intellij.openapi.keymap.KeymapManager
+import com.intellij.codeInsight.intention.IntentionManager
 import javax.swing.KeyStroke
 
 PMIP_MENU = "PMIP::PopupMenu"
@@ -14,6 +15,7 @@ class Binder
     unregister(key, id, force)
     register(key, action, id)
     add_menu_item(action)
+    register_intention(action) if intention?(action)
 
     key_binding = key == '' ? ' ' : " -> #{key} "
     puts "- Bound #{id}#{key_binding}#{render_usages(id)}"
@@ -22,13 +24,11 @@ class Binder
   private
 
   def self.shortcut(key)
-    KeyboardShortcut.new(key_stroke(key, true), nil)
+    KeyboardShortcut.new(key_stroke(key), nil)
   end
 
-  def self.key_stroke(key, strict = false)
-    key_stroke = KeyStroke.get_key_stroke(key)
-    raise "- The keystroke [#{key}] doesnt seem to be valid - please ensure that any single characters are uppercased (i.e. 'alt shift A' instead of 'alt shift a'). Consult java.awy.KeyStroke.getKeyStroke() for further information" if strict && key_stroke.nil?
-    key_stroke
+  def self.key_stroke(key)
+    KeyStroke.get_key_stroke(key)
   end
 
   def self.add_menu_item(action)
@@ -64,6 +64,20 @@ class Binder
   def self.render_usages(id)
     count = usages(id)
     count == 0 ? '' : "(#{count})"
+  end
+
+  def self.register_intention(action)
+    category = ['category'].to_java(java.lang.String)
+    template = 'template'
+    description = 'description'
+    example_usages_before = java.lang.String[0].new
+    example_usages_after = java.lang.String[0].new
+
+    IntentionManager.instance(PMIPContext.new.project).register_intention_and_meta_data(action, category, description, template, example_usages_before, example_usages_after)
+  end
+
+  def self.intention?(action)
+    action.respond_to?('available?') && action.respond_to?('describe')
   end
 end
 

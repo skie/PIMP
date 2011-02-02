@@ -9,7 +9,10 @@ class Elements
 
   def find_file(filepath, include_external = false)
     GotoFileModel.new(@context.project).getElementsByName(filepath.filename, include_external, '').
-      select{|e| filepath.to_s == e.virtual_file.path}
+      select{|e|
+      #TIP: this cannot be changed to virtual_file because it fails on plugins written in scala (e.g. scala plugin)
+      filepath.to_s == e.getVirtualFile.path
+    }
   end
 
   #TIP: only works with class names and not fully qualified names

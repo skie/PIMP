@@ -29,7 +29,8 @@ class PMIPContext
   end
 
   def editor_filepath
-    Filepath.new(editor_psi_element.virtual_file.path)
+    #TIP: this cannot be changed to virtual_file because it fails on plugins written in scala (e.g. scala plugin)
+    Filepath.new(editor_psi_element.getVirtualFile.path)
   end
 
   def root

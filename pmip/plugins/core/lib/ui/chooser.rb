@@ -27,19 +27,19 @@ class RecentFilesRenderer < ColoredListCellRenderer
 end
 
 class PreviewLine
-  attr_reader :widget
-
   def initialize
-    @label = JLabel.new
-    @label.setPreferredSize(Dimension.new(500, 15))
+    @text_area = JTextArea.new
+    @text_area.setEditable(false)
+    @text_area.setRows(1)
+    @text_area.setPreferredSize(Dimension.new(500, @text_area.getFontMetrics(@text_area.getFont).getHeight))
   end
 
   def setText(value)
-    @label.setText(value)
+    @text_area.setText(value)
   end
 
   def widget
-    @label
+    @text_area
   end
 end
 

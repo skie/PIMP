@@ -12,7 +12,8 @@ class RunAntTarget < PMIPAction
       result('Running ...')
       Run.read_action { action_manager.get_action(results.first).action_performed(event) }
     elsif results.empty?
-      fail("could not find the ant task: #{@task} - please ensure that the buildfile is loaded in the Ant Build tab and that the task is included in the filter.")
+      puts action_manager.action_ids.sort
+      fail("could not find the ant task: #{@task} - please ensure that the buildfile is loaded in the Ant Build tab, the task is included in the filter and make sure is exists in the list above.")
     else
       fail("expected to find one ant task for: #{@task}, but found: #{results}.")
     end

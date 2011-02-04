@@ -56,7 +56,7 @@ class PMIPAction < PMIPBaseAction
   private
 
   def reset_result
-    result('Nothing to do')
+    result('Done')
   end
 end
 

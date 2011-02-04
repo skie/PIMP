@@ -28,7 +28,9 @@ class Binder
   end
 
   def self.key_stroke(key)
-    KeyStroke.get_key_stroke(key)
+    key_stroke = KeyStroke.get_key_stroke(key)
+    raise "'#{key}' does not seem to be a valid javax.swing.KeyStroke, try using the constants in java.awt.KeyEvent minus the 'VK_' bit" if key_stroke.nil?
+    key_stroke
   end
 
   def self.add_menu_item(action)

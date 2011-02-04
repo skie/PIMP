@@ -83,7 +83,7 @@ class PMIPServlet < WEBrick::HTTPServlet::AbstractServlet
   end
 
   def reset_result
-    result('Nothing to do')
+    result('Done')
   end
 
   private

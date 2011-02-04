@@ -16,4 +16,8 @@ class Dialogs
    def yes_no(title, message)
      Messages.showYesNoDialog(@project, message, title, Messages.getQuestionIcon) == 0
    end
+
+   def input(title, message)
+     Messages.showInputDialog(@project, message, title, nil)
+   end
 end

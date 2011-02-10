@@ -21,17 +21,20 @@ class OptimiseDevelopmentEnvironment < PMIPAction
   end
 
   def set_priority(processes, priority)
-    processes.each{|p| puts `#{plugin_root}/pv -p"#{priority}" #{p}`.split("\n").first.strip }
+    processes.each{|p|
+      check = `#{plugin_root}/pv -p"#{priority}" #{p}`.split("\n").first.strip
+      raise "failed to set priority to #{priority} for #{p}" unless check.include?("Setting priority to #{priority} for '#{p}'")
+    }
   end
 
   def disable_last_access_timestamp
     `FSUTIL behavior set disablelastaccess 1`
     check = `FSUTIL behavior query disablelastaccess`
-    puts check
     raise "failed to disablelastaccess" unless '1' == check.split('=').last.strip
   end
 
   def set_win32_priority_seperation
     `regedit /s #{plugin_root}/win32_priority_seperation.reg`
+    #TODO: check it
   end
 end

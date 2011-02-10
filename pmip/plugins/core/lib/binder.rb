@@ -93,7 +93,7 @@ end
 
 def bind_and_run(key, action='', options={}, context = PMIPContext.new)
   action_ro_run = bind(key, action, options)
-  puts "\n- Running #{action_ro_run.name}"
+  puts "- Running #{action_ro_run.name}"
   action_ro_run.run(nil, context)
 end
 

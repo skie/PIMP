@@ -1,4 +1,4 @@
-load 'lib/deprioritise_virus_scanner.rb'
+load 'lib/optimise_development_environment.rb'
 
 bind 'banana F', RunIntellijAction.new('CheckinFiles', "Commit File")
 bind 'alt shift A', RunIntellijAction.new('Annotate', "Toggle Annotate")
@@ -10,4 +10,4 @@ bind 'banana I', ExecuteConfiguration.new('Investor Server')
 bind 'banana D', RunAntTarget.new('db-recreate', 'Re-create Database')
 bind 'banana E', OpenFileExternally.new
 
-bind_and_run 'banana M', DeprioritiseVirusScanner.new
+bind_and_run OptimiseDevelopmentEnvironment.new

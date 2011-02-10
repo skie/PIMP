@@ -19,6 +19,7 @@ class Binder
 
     key_binding = key == '' ? ' ' : " -> #{key} "
     puts "- Bound #{id}#{key_binding}#{render_usages(id)}"
+    action
   end
 
   private
@@ -87,6 +88,12 @@ def bind(key, action='', options={})
   force = options.has_key?(:force) ? options[:force] : true
   #TIP: yikes, nasty, if only one param then assume its an action without a key
   action == '' ? Binder.bind('', key, force) : Binder.bind(key, action, force)
+end
+
+def bind_and_run(key, action='', options={}, context = PMIPContext.new)
+  action_ro_run = bind(key, action, options)
+  puts "\n- Running #{action_ro_run.name}"
+  action_ro_run.run(nil, context)
 end
 
 #TODO: add $plugin namespace support

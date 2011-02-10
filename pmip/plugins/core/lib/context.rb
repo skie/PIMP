@@ -62,7 +62,12 @@ class PMIPContext
   end
 
   def changes_tab?
-    PlatformDataKeys::CHANGES.get_data(data_context) != nil
+    #TIP: this only seems to be available on some platforms (java based ones)
+    begin
+      com.intellij.openapi.actionSystem.ADataKeys::CHANGES.get_data(data_context) != nil
+    rescue
+      false
+    end
   end
 
   def has_virtual_files?
@@ -78,7 +83,8 @@ class PMIPContext
   end
 
   def changes_tab_psi_elements
-    PlatformDataKeys::CHANGES.get_data(data_context).collect{|f| ChangesUtil.get_file_path(f) }
+    #TIP: this only seems to be available on some platforms (java based ones)
+    com.intellij.openapi.actionSystem.DataKeys::CHANGES.get_data(data_context).collect{|f| ChangesUtil.get_file_path(f) }
   end
 
   def virtual_file_psi_elements

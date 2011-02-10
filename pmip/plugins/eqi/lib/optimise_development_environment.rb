@@ -1,10 +1,12 @@
 #TIP: uses PrcView - http://download.cnet.com/PrcView/3000-2086_4-10025832.html
+#TIP: includes tweaks from http://kadaitcha.cx/xp/performance.html
 class OptimiseDevelopmentEnvironment < PMIPAction
   def run(event, context)
     if OS.windows?
       set_priority(mcaffe_processes, 'Idle')
-      set_priority('tsvncache.exe', 'Idle')
+      set_priority(['tsvncache.exe'], 'Idle')
       disable_last_access_timestamp
+      set_win32_priority_seperation
     end
   end
 
@@ -24,6 +26,12 @@ class OptimiseDevelopmentEnvironment < PMIPAction
 
   def disable_last_access_timestamp
     `FSUTIL behavior set disablelastaccess 1`
-    puts `FSUTIL behavior query disablelastaccess`
+    check = `FSUTIL behavior query disablelastaccess`
+    puts check
+    raise "failed to disablelastaccess" unless '1' == check.split('=').last.strip
+  end
+
+  def set_win32_priority_seperation
+    `regedit /s #{plugin_root}/win32_priority_seperation.reg`
   end
 end

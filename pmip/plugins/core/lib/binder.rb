@@ -40,6 +40,7 @@ class Binder
 
   def self.unregister(key, id, force)
     action_manager.unregister_action(id)
+    return if key == ''
 
     keymap.action_ids(key_stroke(key)).each{|bound_id|
       if !force && bound_id != id

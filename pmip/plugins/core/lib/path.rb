@@ -12,6 +12,10 @@ class Path
     Filepath.new(@path + '/' + filename)
   end
 
+  def exist?
+    File.exist?(@path) &&File.directory?(@path)
+  end
+
   def to_s
     @path
   end

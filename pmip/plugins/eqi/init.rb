@@ -1,6 +1,7 @@
 load 'lib/optimise_development_environment.rb'
 
 bind 'banana F', RunIntellijAction.new('CheckinFiles', "Commit File")
+bind 'banana C', RunIntellijAction.new('CompareClipboardWithSelection', "Compare With Clipboard")
 bind 'alt shift A', RunIntellijAction.new('Annotate', "Toggle Annotate")
 bind 'alt shift H', RunIntellijAction.new('Vcs.ShowTabbedFileHistory', "Show History")
 bind 'banana PAGE_UP', RunIntellijAction.new('MembersPullUp')

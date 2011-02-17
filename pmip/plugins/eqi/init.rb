@@ -9,6 +9,6 @@ bind 'banana PAGE_DOWN', RunIntellijAction.new('MemberPushDown')
 bind 'banana T', ExecuteConfiguration.new('EQI Trader (with fake services)')
 bind 'banana I', ExecuteConfiguration.new('Investor Server')
 bind 'banana D', RunAntTarget.new('db-recreate', 'Re-create Database')
-bind 'banana E', OpenFileExternally.new
+bind 'alt shift E', OpenFileExternally.new
 
 bind_and_run OptimiseDevelopmentEnvironment.new

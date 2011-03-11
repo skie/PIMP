@@ -1,13 +1,16 @@
 load 'lib/optimise_development_environment.rb'
 
-bind 'banana F', RunIntellijAction.new('CheckinFiles', "Commit File")
-bind 'banana C', RunIntellijAction.new('CompareClipboardWithSelection', "Compare With Clipboard")
+bind 'banana ENTER', RunIntellijAction.new('EditorToggleColumnMode', 'Column Mode')
+bind 'banana F', RunIntellijAction.new('OpenInBrowser', 'Open in Browser')
 bind 'alt shift A', RunIntellijAction.new('Annotate', "Toggle Annotate")
 bind 'alt shift H', RunIntellijAction.new('Vcs.ShowTabbedFileHistory', "Show History")
-bind 'banana PAGE_UP', RunIntellijAction.new('MembersPullUp')
-bind 'banana PAGE_DOWN', RunIntellijAction.new('MemberPushDown')
-bind 'banana T', ExecuteConfiguration.new('EQI Trader (with fake services)')
-bind 'banana I', ExecuteConfiguration.new('Investor Server')
+bind 'banana LEFT', RunIntellijAction.new('ChangesView.Rollback', 'Revert changes')
+bind 'banana RIGHT', RunIntellijAction.new('CheckinFiles', "Commit Changes")
+bind 'banana C', RunIntellijAction.new('CompareClipboardWithSelection', "Compare With Clipboard")
+bind 'banana PAGE_UP', RunIntellijAction.new('MembersPullUp', 'Pull Up')
+bind 'banana PAGE_DOWN', RunIntellijAction.new('MemberPushDown', 'Push Down')
+bind 'banana T', ExecuteConfiguration.new('EQI Trader (for local)', 'Run', 'Run Trader')
+bind 'banana I', ExecuteConfiguration.new('Investor Server', 'Run', 'Run Investor')
 bind 'banana D', RunAntTarget.new('db-recreate', 'Re-create Database')
 bind 'alt shift E', OpenFileExternally.new
 

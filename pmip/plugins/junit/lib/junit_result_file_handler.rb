@@ -4,7 +4,7 @@ class JUnitResultFileHandler < NonCachingFileHandler
     if root.exist?
       super
     else
-      res.body = "<html><body>Sorry, no junit test reuslts found in: #{root}</body></html>"
+      res.body = "<html><body>Sorry, no junit test results found in: #{root}</body></html>"
     end
   end
 end

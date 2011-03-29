@@ -14,10 +14,7 @@ class ProgressBar
     @progress_bar.set_string(text)
     @progress_bar.set_tool_tip_text(tool_tip)
     @label.set_text(label)
-  end
-
-  def finish
-    @status_bar.clear
+    self
   end
 
   def update(done, of, text='', label='', tool_tip='')
@@ -27,5 +24,10 @@ class ProgressBar
     @progress_bar.set_tool_tip_text(tool_tip)
     @label.set_text(label)
     @progress_bar.set_value(done)
+    self
+  end
+
+  def finish
+    @status_bar.clear
   end
 end

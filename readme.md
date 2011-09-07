@@ -24,6 +24,7 @@ In a nutshell, PMIP provides:
 
 Bind a simple action to a keypress:
 
+```ruby
 	class HelloWorldAction < PMIPAction
 	  def run(event, context)
 		Dialogs.new(context).info('Hello World', 'Hello from PMIP!')
@@ -31,7 +32,8 @@ Bind a simple action to a keypress:
 	end
 	
 	bind 'ctrl alt shift A', HelloWorldAction.new
-
+```
+	
 For a more complex example see: [PoorMansTestDox](https://github.com/skie/PIMP/wiki/PoorMansTestDox) a port of the excellent [TestDox](http://plugins.intellij.net/plugin/?idea&id=96) plugin (always the first plugin I install).
 
 

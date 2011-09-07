@@ -7,6 +7,7 @@ class Editor
     @selection_model = editor.selection_model
     @caret_model = editor.caret_model
     @scrolling_model = editor.getScrollingModel
+    @soft_wrap_model = editor.getSoftWrapModel
   end
 
   def selection_model
@@ -17,14 +18,22 @@ class Editor
 	@soft_wrap_model
   end
   
+  def document
+    @editor.get_document
+  end
+  
   def insert(s) 
 	EditorModiUtil.insertStringAtCaret(@editor, s)
+  end 
+
+  def insert_ext(s, toProcessOverwriteMode, toMoveCaret) 
+	EditorModiUtil.insertStringAtCaretExt(@editor, s, toProcessOverwriteMode, toMoveCaret)
   end 
  
   def delete_selected_text
     EditorModiUtil.delete_selected_text(@editor)
   end 
-  
+ 
   def word
     return '' if !has_editor?
     @selection_model.select_word_at_caret(false)
@@ -85,4 +94,5 @@ class Editor
   def has_editor?
     !@editor.nil?
   end
+  
 end

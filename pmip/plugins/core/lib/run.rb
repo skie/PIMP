@@ -1,4 +1,5 @@
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.command.CommandProcessor;
 
 class RunnableBlock
   include java.lang.Runnable
@@ -27,5 +28,9 @@ class Run
 
   def self.write_action(&block)
     ApplicationManager.application.runWriteAction(RunnableBlock.new(block))
+  end
+
+  def self.execute_command(project, &block)
+    CommandProcessor.getInstance().executeCommand(project, RunnableBlock.new(block))
   end
 end

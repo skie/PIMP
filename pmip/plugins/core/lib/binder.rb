@@ -97,6 +97,15 @@ def bind_and_run(key, action='', options={}, context = PMIPContext.new)
   action_ro_run.run(nil, context)
 end
 
+def register(action, options={})
+  id = action.name
+  ActionManager.instance.unregister_action(id)
+  Binder.add_menu_item(action)
+  count = usages(id)
+  count = count == 0 ? '' : "(#{count})"
+  puts "- Register action #{id} #{count}"
+end
+
 #TODO: add $plugin namespace support
 action_manager = ActionManager.instance
 pmip_action_group = action_manager.getAction(PMIP_MENU)

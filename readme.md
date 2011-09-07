@@ -37,8 +37,7 @@ For a more complex example see: [[PoorMansTestDox]] a port of the excellent [Tes
 
 Sounds great, how do I start writing my own plugins?
 
-1 Follow the tutorial to get a simple plugin running: [[GettingStarted]] -> [[InstallingTheCoreBundle]] -> [[CreatingNewPlugins]] -> [[WritingActions]] -> [[BindingActions]]
-2 Look at the code for some [[ExamplePlugins]]
-3 Consult the [[CoreBundleApi]]
-4 Got a problem? See: [[FrequentlyAskedQuestions]]
-5 If you like PMIP, please rate it in the Intellij Plugin Repository 
+- Follow the tutorial to get a simple plugin running: [GettingStarted](https://github.com/skie/PIMP/wiki/GettingStarted) -> [InstallingTheCoreBundle](https://github.com/skie/PIMP/wiki/InstallingTheCoreBundle) -> [CreatingNewPlugins](https://github.com/skie/PIMP/wiki/CreatingNewPlugins) -> [WritingActions](https://github.com/skie/PIMP/wiki/WritingActions) -> [BindingActions](https://github.com/skie/PIMP/wiki/BindingActions)
+- Look at the code for some [ExamplePlugins](https://github.com/skie/PIMP/wiki/ExamplePlugins)
+- Consult the [CoreBundleApi](https://github.com/skie/PIMP/wiki/CoreBundleApi)
+- Got a problem? See: [FrequentlyAskedQuestions](https://github.com/skie/PIMP/wiki/FrequentlyAskedQuestions)

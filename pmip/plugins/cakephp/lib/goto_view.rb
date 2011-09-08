@@ -12,16 +12,17 @@ class GotoView < PMIPAction
 		if line =~ /.*function (\w*?)\s*\(.*/
 			methodname = $1
 		end
-		puts line
 		if line =~ /.*render\(["'](\w+*)["'].*/
 			methodname = $1
 		end
-		puts methodname
-		goto(className, methodname) unless methodname.nil? || className.nil?  #if it contains something that looks like a css, bit between "" 
+		if !(methodname.nil? || className.nil?)
+		  goto(className, methodname)  #if it contains something that looks like a css, bit between "" 
+		  result("#{methodname} done")  
+		end
 	end
   
 	def goto(className, methodname)
-	  files = Files.new.include("pfp/**/views/**/#{className}/**/#{methodname}.ctp") # wrapper around ant DirectoryScanner 
+	  files = Files.new.include(APPROOT + "/**/views/**/#{className}/**/#{methodname}.ctp") # wrapper around ant DirectoryScanner 
 	  results = FindInFiles.new(files).get_list(/.*/, methodname) # wrapper around ant DirectoryScanner 
 
 	  if results.empty?

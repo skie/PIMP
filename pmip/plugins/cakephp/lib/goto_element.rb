@@ -1,13 +1,13 @@
 class GotoElement < PMIPAction
 	def run(event, context)
 		line = context.current_editor.line # get the text of the current editor 
-		line =~ /.*element\(['"](.*?)['"]\).*/
+		line =~ /.*element\(['"](.*?)['"].*\).*/
 		elementPath = $1
 		goto(elementPath) unless elementPath.nil?  #if it contains something that looks like a css, bit between "" 
 	end
   
 	def goto(elementPath)
-	  files = Files.new.include("pfp/**/elements/#{elementPath}.ctp") # wrapper around ant DirectoryScanner 
+	  files = Files.new.include(APPROOT + "/**/elements/#{elementPath}.ctp") # wrapper around ant DirectoryScanner 
 	  results = FindInFiles.new(files).get_list(/.*/, elementPath) # wrapper around ant DirectoryScanner 
 
 	  if results.empty?

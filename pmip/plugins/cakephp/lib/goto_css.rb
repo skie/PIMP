@@ -1,4 +1,4 @@
-class GotoCss < PMIPAction
+class GotoCss < GotoAction
 	def run(event, context)
 		line = context.current_editor.line # get the text of the current editor 
 		line =~ /.*class\s*=\s*"(.*?)".*/
@@ -6,11 +6,24 @@ class GotoCss < PMIPAction
 		line = context.current_editor.line 
 		line =~ /.*id\s*=\s*"(.*?)".*/
 		id = $1
-		goto(css, id) unless css.nil? && id.nil? #if it contains something that looks like a css, bit between "" 
+		goto(css, id, context) unless css.nil? && id.nil? #if it contains something that looks like a css, bit between "" 
 	end
   
-	def goto(klass, id)
-	  files = Files.new.include(APPROOT + '/webroot/css/**/*.css') # wrapper around ant DirectoryScanner 
+	def goto(klass, id, context)
+	  foldersToScan = [
+	    APPROOT + "/plugins/*/views/**/webroot", 
+		APPROOT + "/plugins/*/webroot", 
+		APPROOT + "/views/**/webroot",
+	    APPROOT + "/Plugin/*/View/**/webroot", 
+		APPROOT + "/Plugin/*/webroot", 
+		APPROOT + "/View/**/webroot"
+		]
+	  listfolders = scan_folder(context, foldersToScan)
+	  listfolders.push(APPROOT + "/webroot/")
+	  folders = includes(["css/**/*.css"], listfolders)
+	  files = Files.new
+	  folders.each {|f| files.include(f)}
+	
 	  if !klass.nil?
 		klass = '\.' + klass
 	    resultsKlass = FindInFiles.new(files).pattern(/#{klass}/, klass) # wrapper around ant DirectoryScanner 
@@ -36,16 +49,7 @@ class GotoCss < PMIPAction
         end
       end
 	  
-	  puts results.count
-	  if results.empty?
-		Balloon.new.info("could not find css: #{str}, delete it!") # wrapper around intellij Balloon notfier UI 
-	  else
-		Chooser.new("Goto css for: #{str}", results). # wrapper around intellij PopupChooser and friends - like the CTRL-E chooser 
-		  description {|r| r.filepath }.
-		  preview_line {|r| r.content }.
-		  on_selected {|r| r.navigate_to.highlight_word }. # wrapper around PsiElements, SelectionModel etc etc 
-		  show
-	  end
+	  display(results, "could not find css: #{str}, delete it!", "Goto css for: #{str}")
 	end  
 end
 

@@ -1,4 +1,4 @@
-class GotoView < PMIPAction
+class GotoView < GotoAction
 	def run(event, context)
 		text = context.current_editor.document.get_text
 		className = ''
@@ -16,24 +16,26 @@ class GotoView < PMIPAction
 			methodname = $1
 		end
 		if !(methodname.nil? || className.nil?)
-		  goto(className, methodname)  #if it contains something that looks like a css, bit between "" 
+		  goto(className, methodname, context)  #if it contains something that looks like a css, bit between "" 
 		  result("#{methodname} done")  
 		end
 	end
   
-	def goto(className, methodname)
-	  files = Files.new.include(APPROOT + "/**/views/**/#{className}/**/#{methodname}.ctp") # wrapper around ant DirectoryScanner 
+	def goto(className, methodname, context)
+	  foldersToScan = [
+	    APPROOT + "/plugins/*/views",
+	    APPROOT + "/Plugin/*/View"
+	  ]
+	  listfolders = scan_folder(context, foldersToScan)
+	  listfolders.push(APPROOT + "/views/")
+	  listfolders.push(APPROOT + "/View/")
+	  folders = includes(["**/#{className}/**/#{methodname}.ctp"], listfolders)
+	  files = Files.new
+	  folders.each {|f| files.include(f)}
+	  
 	  results = FindInFiles.new(files).get_list(/.*/, methodname) # wrapper around ant DirectoryScanner 
 
-	  if results.empty?
-		Balloon.new.info("could not find view: #{methodname}") # wrapper around intellij Balloon notfier UI 
-	  else
-		Chooser.new("Goto element for: #{methodname}", results). # wrapper around intellij PopupChooser and friends - like the CTRL-E chooser 
-		  description {|r| r.filepath}.
-		  preview_line {|r| r.content}.
-		  on_selected {|r| r.navigate_to.highlight_word}. # wrapper around PsiElements, SelectionModel etc etc 
-		  show
-	  end
+	  display(results, "could not find view: #{methodname}", "Goto view for: #{methodname}")
 	end  
+	
 end
-

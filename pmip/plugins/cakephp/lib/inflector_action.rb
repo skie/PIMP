@@ -7,7 +7,7 @@ class InflectorAction < PMIPAction
 
   def run(event, context) 
 	Run.write_action {
-	  selection_model = context.current_editor.getSelectionModel
+	  selection_model = context.current_editor.selection_model
 	  if selection_model.has_selection
 	    word = selection_model.get_selected_text
 	  else

@@ -1,5 +1,6 @@
 load 'lib/toggle_test.rb'
 load 'lib/toggle_js.rb'
+load 'lib/goto_action.rb'
 load 'lib/goto_css.rb'
 load 'lib/goto_element.rb'
 load 'lib/goto_view.rb'

@@ -33,6 +33,16 @@ class Files
     scanner.included_files.collect{|f| @context.filepath_from_root(f) }
   end
 
+  def find_dir
+    scanner = DirectoryScanner.new
+    scanner.setBasedir(@context.root)
+    scanner.setCaseSensitive(false)
+    scanner.setIncludes(@includes.to_java :String) unless @includes.empty?
+    scanner.setExcludes(@excludes.to_java :String) unless @excludes.empty?
+    scanner.scan
+    scanner.included_directories.collect{|f| @context.filepath_from_root(f) }
+  end
+
   def to_s
     "\nFiles: [includes: #{@includes}, excludes: #{@excludes}]"
   end

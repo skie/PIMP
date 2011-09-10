@@ -4,7 +4,9 @@ class FindInFiles
   end
 
   def get_list(pattern, name)
-    Refresh.file_system_before { @files.find.inject([]){|results, f| append_get_list(results, f, name, pattern)} }
+    Refresh.file_system_before {
+		@files.find.inject([]){|results, f| append_get_list(results, f, name, pattern)} 
+	}
   end
   
   def pattern(pattern, name)
@@ -26,6 +28,7 @@ class FindInFiles
   end
 
   def append_get_list(results, f, name, pattern)
+    puts name
 	results << FindResult.new(f, 1, 1, name, name)
     results
   end
